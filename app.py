@@ -2,7 +2,9 @@ import os
 from flask import Flask , render_template, url_for, redirect
 
 app = Flask(__name__)
+app.config =["MONGO_DBNAME"]= 'Before&After'
 
+mongo =PyMongo(app)
 
 @app.route('/')
 def hello():
