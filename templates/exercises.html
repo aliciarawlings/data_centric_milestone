@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+  <div class="container teal lighten-2">
+  
+   {% for exercise in  exercises %}
+     <h2> {{exercise.exercises_type}}</h2>
+    <ol>
+      <li>  {{how_many_sets}}</li>
+      <li> {{ how_many_reps}}</li>
+      <li> {{ exercise_duration}} </li>
+
+    {% endfor %}
+</div>
+  
+
+  
+    
+
+
+{% endblock %}
