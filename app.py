@@ -25,9 +25,19 @@ mongo= PyMongo(app)
 def get_exercises():
     return render_template('exercises.html', exercises=mongo.db.exercises.find())
 
-@app.route('/add_exercises')
-def add_exercises():
-    return render_template('add_exercise.html')
+@app.route('/add_exercise')
+def add_exercise():
+    return render_template('add_exercise.html', exercises=mongo.db.exercises.find())
+
+    
+
+@app.route('/insert_exercise', methods=['POST'])
+def insert_exercise():
+    exercises = mongo.db.exercises
+    exercises.insert_one(request.form.to_dict())
+    return redirect(url_for('get_exercises'))    
+
+
 
 
 if __name__ == '__main__':
