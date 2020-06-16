@@ -1,36 +1,30 @@
 import pymongo
 import os
-
 from flask import Flask, render_template, redirect,request, url_for 
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+if os.path.exists("env.py"):
+    import env
+
+
 app = Flask(__name__)
-MONGODB_URI = os.getenv("MONGO_URI")
-app.config["MONGO_URI"] = "mongodb://localhost:27017/Before&After"
-DBS_NAME = "Before&After"
-COLLECTION_NAME = "exercises"
+
+
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["MONGO_DBNAME"] = 'before_and_after'
 
 mongo= PyMongo(app)
 
 
-## Starting connection with MONGODB
-def mongo_connect(url):
-    try:
-        conn = pymongo.MongoClient(url)
-        print("Mongo is connected!")
-        return conn
-    except pymongo.errors.ConnectionFailure as e:
-        print("Could not connect to MongoDB: %s") % e
-        
-conn = mongo_connect(MONGODB_URI)
 
-coll = conn[DBS_NAME][COLLECTION_NAME]
+
 
 @app.route('/')
 @app.route('/get_exercises')
 def get_exercises():
-    return render_template('exercises.html', recipes=mongo.db.exercises.find())
+    return render_template('exercises.html', exercises=mongo.db.exercises.find())
+
 
 
 if __name__ == '__main__':

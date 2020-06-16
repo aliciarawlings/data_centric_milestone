@@ -11,14 +11,14 @@
 <body>
 <header>
 
-  <nav class="nav-extended orange lighten-1">
+  <nav class="nav-extended grey darken-1">
     <div class="nav-wrapper">
       <a href="#" class="brand-logo center-align"></a>
     </div>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
          <li class="tab"><a href="#">Home</a></li>
-        <li class="tab"><a href="">Search  </a></li>
+        <li class="tab"><a href="{{ url_for ('get_exercises')}}">Search Exercises</a></li>
        <li class="tab"><a href="">Add Your own Workout</a></li>
       </ul>
     </div>

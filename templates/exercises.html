@@ -3,14 +3,15 @@
 {% block content %}
 
 
-  <div class="container teal lighten-2">
+  <div class="container blue lighten-5">
+
   
-   {% for exercise in  exercises %}
-     <h2> {{exercise.exercises_type}}</h2>
+   {% for exercises in  exercises %}
+     <h2> {{exercises.exercise_type}}</h2>
     <ol>
-      <li>  {{how_many_sets}}</li>
-      <li> {{ how_many_reps}}</li>
-      <li> {{ exercise_duration}} </li>
+      <li>  {{exercises.number_of_sets}}</li>
+      <li> {{ exercises.number_of_reps}}</li>
+      <li> {{ exercises.exercise_duration}}</li>
 
     {% endfor %}
 </div>
