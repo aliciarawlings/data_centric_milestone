@@ -38,6 +38,11 @@ def insert_exercise():
     return redirect(url_for('get_exercises'))    
 
 
+@app.route('/index_page')
+def index_page():
+    return render_template('index.html')
+
+
 
 
 if __name__ == '__main__':
