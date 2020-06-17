@@ -19,15 +19,19 @@ mongo= PyMongo(app)
 
 
 
-
 @app.route('/')
+@app.route('/index_page')
+def index_page():
+    return render_template('index.html')
+
+
 @app.route('/get_exercises')
 def get_exercises():
     return render_template('exercises.html', exercises=mongo.db.exercises.find())
 
 @app.route('/add_exercise')
 def add_exercise():
-    return render_template('add_exercise.html', exercises=mongo.db.exercises.find())
+    return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
 
     
 
@@ -37,10 +41,6 @@ def insert_exercise():
     exercises.insert_one(request.form.to_dict())
     return redirect(url_for('get_exercises'))    
 
-
-@app.route('/index_page')
-def index_page():
-    return render_template('index.html')
 
 
 
