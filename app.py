@@ -43,7 +43,8 @@ def insert_exercise():
 
 @app.route('/muscle_categories')
 def muscle_categories():
-    return render_template('muscle_categories.html', muscle_categories=mongo.db.muscle_categories.find())    
+    return render_template('muscle_categories.html', muscle_categories=mongo.db.muscle_categories.find())   
+ 
 
 
 

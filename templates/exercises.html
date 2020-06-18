@@ -2,14 +2,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-  <div class="container blue lighten-5">
-
-  
+<ul class="collapsible">
+  {% for exercises  in exercises %}
+ 
+    
+    
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{exercises.exercise_type}}</div>
+      <div class="collapsible-body"><span>{{exercises.muscle_categories}}</span>
+      
+        <span>{{exercises.amount_of_reps}}</span>
+        <span>{{exercises.amount_of_sets}}</span>
+        <span>{{exercises.exercise_duration}}</span>
+     </div>
+    </li>
+</ul>
+    
    
-
-</div>
-  
+  {% endfor %}
+   
+ 
 
   
     

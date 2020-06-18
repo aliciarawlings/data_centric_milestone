@@ -13,14 +13,14 @@
 
   <nav class="nav-extended grey darken-1">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo right">Before & After</a>
+      <a href="#" class="brand-logo right">B&A</a>
     </div>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-         <li class="tab"><a href="{{url_for,('index_page')}}">Home</a></li>
+         <li class="tab"><a href="{{url_for('index_page')}}">Home</a></li>
         <li class="tab"><a href="{{url_for,('get_exercises')}}">Search Exercises</a></li>
        <li class="tab"><a href="{{url_for,('add_exercise')}}">Add Your own Workout</a></li>
-       <li class="tab"><a href="#">Muscle Categories</a></li>
+       <li class="tab"><a href="{{ url_for ('muscle_categories')}}">Muscle Categories</a></li>
       </ul>
     </div>
   </nav>
@@ -37,7 +37,8 @@
        $(document).ready(function() {
             $('.collapsible').collapsible();
             $('select').material_select();
-             $('.slider').slider();
+            $('.slider').slider();
+             
         });
 
     </script>
