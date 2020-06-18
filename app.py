@@ -41,6 +41,10 @@ def insert_exercise():
     exercises.insert_one(request.form.to_dict())
     return redirect(url_for('get_exercises'))    
 
+@app.route('/muscle_categories')
+def muscle_categories():
+    return render_template('muscle_categories.html', muscle_categories=mongo.db.muscle_categories.find())    
+
 
 
 
