@@ -20,26 +20,33 @@
       <div class="row">
         <div class="input-field col s12"  id="add_more">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="exercise_type" name="exercise_type">
+          <input type="text" id="exercise_type" name="exercise_type"required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Exercise Name</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps"  name="amount_of_reps"class="autocomplete">
+          <input type="text" id="amount_of_reps"  name="amount_of_reps"class="autocomplete" required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Amount of Reps</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_sets" name="amount_of_sets">
+          <input type="text" id="amount_of_sets" name="amount_of_sets"required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Amount of Sets</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="text" id="exercise_duration" name="exercise duration">
+          <input type="text" id="exercise_duration" name="exercise duration" required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Exercise Duration</label>
+
+         <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea2" class="materialize-textarea" data-length="250"></textarea>
+            <label for="textarea2">Textarea</label>
+          </div>
+
         
         </div>
       </div>
