@@ -62,16 +62,18 @@ def edit_exercise(exercises_id):
     return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_muscle_categories)
 
 
+##login index page
+@app.route('/login')
+def login_index():
+    if 'username' in session:
+        return 'you are logged in as' + session['username']
+
+    return render_template('login.html')
+
 ##This is the login page route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('userprofile'))
-    return render_template('login.html', error=error)
+    return render_template('login.html')
 
 
 @app.route('/register', methods=['POST','GET'])
@@ -82,10 +84,11 @@ def register():
 
         if present_user is None:
             hashpass =bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
-            users.insert({'name': request.form['username'],'password': hashpass })
+            users.insert({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
             session['username']= request.form['username']
-            return 'You are logged in as '+ session["username"]
-            return redirect(url_for('userprofile'))
+            return redirect('userprofile')
+           
+            
 
         return 'That username already exists!' 
 
