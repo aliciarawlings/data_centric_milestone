@@ -30,6 +30,8 @@ def index_page():
 def get_exercises():
     return render_template('exercises.html', exercises=mongo.db.exercises.find())
 
+    
+
 @app.route('/add_exercise')
 def add_exercise():
     return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
