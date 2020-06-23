@@ -44,7 +44,7 @@ def insert_exercise():
 
 @app.route('/muscle_categories')
 def muscle_categories():
-    return render_template('muscle_categories.html', muscle_categories=mongo.db.muscle_categories.find())   
+    return render_template('exercises.html', muscle_categories=mongo.db.muscle_categories.find())   
  
 
 @app.route('/edit_exercise/<exercises_id>')
@@ -52,6 +52,7 @@ def edit_exercise(exercises_id):
     the_exercise = mongo.db.exercises.find_one({"_id:ObjectId(exercises_id)"})
     all_muscle_categories= mongo.db.muscle_categories.find()
     return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_muscle_categories)
+
 
 
 if __name__ == '__main__':
