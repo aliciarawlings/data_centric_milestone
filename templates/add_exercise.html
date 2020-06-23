@@ -6,7 +6,7 @@
 <div class="row">
 <div class="input-field col s12">
     <select id ="muscle_categories" name="muscle_categories">
-      <option value="" disabled selected>Choose your option</option>
+      <option value="" disabled selected>Muscle Categories</option>
       {% for muscles in muscle_categories %}
         <option value="{{ muscles.muscle_category}}">{{ muscles.muscle_category}}</option>
       {% endfor %}

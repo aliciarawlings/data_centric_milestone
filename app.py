@@ -1,6 +1,7 @@
 import pymongo
+import bcrypt
 import os
-from flask import Flask, render_template, redirect,request, url_for 
+from flask import Flask, render_template, redirect,request, url_for , session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -9,17 +10,19 @@ if os.path.exists("env.py"):
     import env
 
 
+
 app = Flask(__name__)
 
 
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.config["MONGO_DBNAME"] = 'before_and_after'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 mongo= PyMongo(app)
 
 
 
-
+##homepage
 @app.route('/')
 @app.route('/index_page')
 def index_page():
@@ -70,9 +73,24 @@ def login():
             return redirect(url_for('userprofile'))
     return render_template('login.html', error=error)
 
-@app.route('/login_page')
-def login_page():
-    return render_template('login.html')
+
+@app.route('/register', methods=['POST','GET'])
+def register():
+    if request.method =='POST':
+        users=mongo.db.users
+        present_user = users.find_one({'name': request.form['username']})
+
+        if present_user is None:
+            hashpass =bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
+            users.insert({'name': request.form['username'],'password': hashpass })
+            session['username']= request.form['username']
+            return 'You are logged in as '+ session["username"]
+            return redirect(url_for('userprofile'))
+
+        return 'That username already exists!' 
+
+
+    return render_template('register.html')    
 
 
 ##The users Profile they see when they login 
