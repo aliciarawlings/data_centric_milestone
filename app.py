@@ -70,6 +70,11 @@ def login():
             return redirect(url_for('userprofile'))
     return render_template('login.html', error=error)
 
+@app.route('/login_page')
+def login_page():
+    return render_template('login.html')
+
+
 ##The users Profile they see when they login 
 @app.route('/userprofile')
 def userprofile():

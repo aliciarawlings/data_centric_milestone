@@ -11,19 +11,18 @@
 <body>
 <header>
 
-  <nav class="nav-extended grey darken-1">
-    <div class="nav-wrapper">
+
+  <nav>
+    <div class="nav-wrapper grey darken-1">
       <a href="#" class="brand-logo right">B&A</a>
-    </div>
-    <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-         <li class="tab"><a href="{{url_for('index_page')}}">Home</a></li>
-        <li class="tab"><a href="{{url_for('get_exercises')}}">Search Exercises</a></li>
-       <li class="tab"><a href="{{url_for('add_exercise')}}">Add Your own Workout</a></li>
-     
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{{url_for('index_page')}}">Home</a></li>
+        <li><a href="{{url_for('get_exercises')}}">Exercises</a></li>
+         <li><a href="{{url_for('login')}}">Login</a></li>
       </ul>
     </div>
   </nav>
+ 
 
 
   
