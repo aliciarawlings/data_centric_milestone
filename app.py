@@ -27,6 +27,9 @@ def index_page():
     return render_template('index.html')
 
 
+
+
+
 # Displays all exercises added to the database
 @app.route('/get_exercises')
 def get_exercises():
@@ -35,10 +38,17 @@ def get_exercises():
 
 
 
+
+
+
 # Form Page to allow users to add an exercise
 @app.route('/add_exercise')
 def add_exercise():
+    
     return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
+
+
+
 
 
 
@@ -46,8 +56,16 @@ def add_exercise():
 @app.route('/insert_exercise', methods=['POST'])
 def insert_exercise():
     exercises = mongo.db.exercises
-    exercises.insert_one(request.form.to_dict())
+
+    exercise_request = request.form.to_dict()
+    exercise_request['user_id'] = ObjectId(session['user_id'])
+    exercises.insert_one(exercise_request)
     return redirect(url_for('userprofile'))
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect(url_for('index_page'))
 
 
 
@@ -55,6 +73,8 @@ def insert_exercise():
 @app.route('/muscle_categories')
 def muscle_categories():
     return render_template('exercises.html', muscle_categories=mongo.db.muscle_categories.find())
+
+
 
 
 
@@ -71,26 +91,32 @@ def edit_exercise(exercises_id):
 @app.route('/login')
 def login_index():
     if 'username' in session:
-        return 'you are logged in as' + session['username']
+        return redirect('userprofile')
 
     return render_template('login.html')
 
 
 
-# This is the login page route
-@app.route('/login', methods=['POST','GET'])
+
+
+# This is the login functionality route
+@app.route('/login', methods=['POST'])
 def login():
     users = mongo.db.users
     account_user = users.find_one({'name': request.form['username']})
-    
+    print (account_user)
     if account_user:
         print(request.form['password'].encode('utf-8'))
         if bcrypt.hashpw(request.form['password'].encode('utf-8'), account_user['password']) == account_user['password']:
-            session['username']= request.form['username']
-            return redirect (url_for('login'))
+            session['username'] = account_user['name']
+            session['user_id'] = str(account_user['_id'])
+
+            return redirect('userprofile')
 
     return 'Invalid username/password combination'   
     
+
+
 
 
 
@@ -116,12 +142,16 @@ def register():
     return render_template('register.html')    
 
 
+
+
+
+
 # The users Profile they see when they login 
 @app.route('/userprofile')
 def userprofile():
-    return render_template('userprofile.html', userprofile= mongo.db.users.find)    
-
-
+    user_excercises = mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) })
+    print (user_excercises)
+    return render_template('userprofile.html', user_exercises = user_excercises)    
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@
 <form action="{{url_for('insert_exercise') }}" method="POST" class="col s12">
 <div class="row">
 <div class="input-field col s12">
-    <select id ="muscle_categories" name="muscle_categories">
+    <select id ="muscle_category" name="muscle_category">
       <option value="" disabled selected>Muscle Categories</option>
       {% for muscles in muscle_categories %}
         <option value="{{ muscles.muscle_category}}">{{ muscles.muscle_category}}</option>
@@ -38,12 +38,12 @@
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="text" id="exercise_duration" name="exercise duration" required data-validation-required-message="Field Required">
+          <input type="text" id="exercise_duration" name="exercise_duration" required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Exercise Duration</label>
 
          <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea2" class="materialize-textarea" data-length="250"></textarea>
+            <textarea id="textarea2" class="materialize-textarea" data-length="250" id="description" name="description"></textarea>
             <label for="textarea2">Workout Description</label>
           </div>
            <div class="row">

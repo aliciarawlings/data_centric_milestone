@@ -2,24 +2,30 @@
 
 {% block content %}
 
-    <!-- Navbar goes here -->
 
-    <!-- Page Layout here -->
+    
      <img src="static/images/profile_avatar.png" alt="profile_avatar" class="profile_avatar">
     <div class="row">
 
-      <div class="col s12 m4 l3"> 
-     hello
+      <div class="col s12 m4 l3 cyan lighten-5"> 
+      <h5> Personal info </h5>
+     
 
       </div>
 
       <div class="col s12 m8 l9"> 
-        page content
+        <a href="{{url_for('add_exercise')}}" class="waves-effect waves-light btn">Add your Own exercise</a>
 
       </div>
 
     </div>
- 
+   <div class="col s12 m4 l3 cyan lighten-5"> 
+      <h5> your exercises you added</h5>
+      {% for user_exercise in user_exercises %}
+        <div>{{ user_exercise.exercise_type }}</div>
+    {% endfor %}
+
+      </div>
    
 
 {% endblock %}
