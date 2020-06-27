@@ -22,7 +22,16 @@
    <div class="col s12 m4 l3 cyan lighten-5"> 
       <h5> your exercises you added</h5>
       {% for user_exercise in user_exercises %}
-        <div>{{ user_exercise.exercise_type }}</div>
+        <div>
+        <h6>{{user_exercise.muscle_category}}</h6>
+        <ul>
+       <li> {{ user_exercise.exercise_type }}</li>
+        <li> {{ user_exercise.amount_of_sets}}</li>
+        <li> {{user_exercise.amount_of_reps}}</li>
+        <li>{{user_exercise.exercise_duration}}</li>
+        
+        </ul>
+        </div>
     {% endfor %}
 
       </div>
