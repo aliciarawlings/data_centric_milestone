@@ -31,9 +31,17 @@ def index_page():
 
 
 # Displays all exercises added to the database
-@app.route('/get_exercises')
-def get_exercises():
-    return render_template('exercises.html', exercises=mongo.db.exercises.find())
+@app.route('/get_exercises/<selected_category>')
+def get_exercises(selected_category):
+    all_exercises = mongo.db.exercises.find()
+    return render_template('exercises.html', exercises=all_exercises,selected_category=selected_category)
+
+@app.route('/get_exercises/<muscle_category_id>')
+def get_exercise_category(muscle_category_id):
+    the_muscle_category= mongo.db.exercises.find_one({"_id":ObjectId(muscle_category_id)})
+    return render_template("exercises.html",exercises=the_muscle_category)
+    
+
 
 
 

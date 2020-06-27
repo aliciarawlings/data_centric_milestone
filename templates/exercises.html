@@ -5,7 +5,30 @@
 
 
  <div class="col s12 m4 l3 cyan lighten-5"> 
-      
+   
+  {% for muscle_category in exercises %}
+  {% if muscle_category.muscle_category == selected_category %}
+
+
+  <div class="card mb-4">
+  <div class="card-body">
+  <div class="row">
+    <div class="col-md-3">
+     image here
+    </div>
+    <div class="col-md-9">
+    <h3 class="card-title">{{muscle_category.muscle_category}}</h3>
+    <p>{{muscle_category.exercise_type}}</p>
+    </div>
+    </div>
+  </div>
+ </div>
+
+
+ 
+  </div>
+    {% endif %}
+    {% endfor %}
      
 
       </div>
