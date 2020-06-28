@@ -87,12 +87,14 @@ def muscle_categories():
 
 
 
-# this is called once the edit button is clicked, redirects to edit page
+# this is called once the edit button is clicked, redirects to edit page.
 @app.route('/edit_exercise/<exercises_id>')
-def edit_exercise(exercises_id):
-    the_exercise = mongo.db.exercises.find_one({"_id:ObjectId(exercises_id)"})
-    all_muscle_categories = mongo.db.muscle_categories.find()
-    return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_muscle_categories)
+def edit_exercise(exercise_id):
+    the_exercise = mongo.db.exercises.find_one({"_id": ObjectId('exercises_id')})
+    all_categories= mongo.db.muscle_categories.find()
+    return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories)
+
+
 
 
 # login index page
@@ -128,7 +130,7 @@ def login():
 
 
 
-
+#This is the register form which posts all the users data to the database. Password
 @app.route('/register', methods=['POST','GET'])
 def register():
     if request.method =='POST':
@@ -160,6 +162,10 @@ def userprofile():
     user_excercises = mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) })
     print (user_excercises)
     return render_template('userprofile.html', user_exercises = user_excercises)    
+
+
+
+
 
 
 if __name__ == '__main__':
