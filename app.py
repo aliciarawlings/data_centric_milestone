@@ -86,6 +86,26 @@ def edit_exercise(user_exercise_id):
     return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories,user_exercise_id=user_exercise_id)
 
 
+#update the task function
+@app.route('/update_exercise/<exercises_id>', methods=["POST"])
+def update_exercise(exercises_id):
+    exercises = mongo.db.exercises
+    exercises.update({'_id': ObjectId(exercises_id)},
+    {
+
+    'exercise_type':request.form.get('exercise_type'),
+    'amount_of_reps':request.form.get('amount_of_reps'),
+    'amount_of_sets':request.form.get('amount_of_sets'),
+    'exercise_duration':request.form.get('exercise_duration'),
+    'workout_description':request.form.get('workout_description')
+
+})
+    return redirect(url_for('userprofile'))
+
+
+
+
+
 #delete exercise function
 @app.route('/delete_exercise/<user_exercise_id>')
 def delete_exercise(user_exercise_id):
