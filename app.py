@@ -27,26 +27,20 @@ def index_page():
     return render_template('index.html')
 
 
-
-
-
 # Displays all exercises added to the database
 @app.route('/get_exercises/<selected_category>')
 def get_exercises(selected_category):
     all_exercises = mongo.db.exercises.find()
     return render_template('exercises.html', exercises=all_exercises,selected_category=selected_category)
 
+
+
+#combines all documents within the exercise database which have matching muscle_categories.
 @app.route('/get_exercises/<muscle_category_id>')
 def get_exercise_category(muscle_category_id):
     the_muscle_category= mongo.db.exercises.find_one({"_id":ObjectId(muscle_category_id)})
     return render_template("exercises.html",exercises=the_muscle_category)
     
-
-
-
-
-
-
 
 
 # Form Page to allow users to add an exercise
@@ -58,9 +52,7 @@ def add_exercise():
 
 
 
-
-
-# this route is used to post the information form the form into the database
+# this route is used to post the information from the form into the database
 @app.route('/insert_exercise', methods=['POST'])
 def insert_exercise():
     exercises = mongo.db.exercises
@@ -70,6 +62,8 @@ def insert_exercise():
     exercises.insert_one(exercise_request)
     return redirect(url_for('userprofile'))
 
+
+#this is the logout function so users can logout of their account 
 @app.route('/logout', methods=['GET'])
 def logout():
     session.clear()
@@ -84,16 +78,19 @@ def muscle_categories():
 
 
 
-
-
-
 # this is called once the edit button is clicked, redirects to edit page.
-@app.route('/edit_exercise/<exercises_id>')
-def edit_exercise(exercise_id):
-    the_exercise = mongo.db.exercises.find_one({"_id": ObjectId('exercises_id')})
+@app.route('/edit_exercise/<user_exercise_id>')
+def edit_exercise(user_exercise_id):
+    the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
     all_categories= mongo.db.muscle_categories.find()
-    return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories)
+    return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories,user_exercise_id=user_exercise_id)
 
+
+#delete exercise function
+@app.route('/delete_exercise/<user_exercise_id>')
+def delete_exercise(user_exercise_id):
+    mongo.db.exercises.remove({'_id': ObjectId(user_exercise_id)})
+    return redirect(url_for('userprofile',user_exercise_id=user_exercise_id))
 
 
 
@@ -162,8 +159,6 @@ def userprofile():
     user_excercises = mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) })
     print (user_excercises)
     return render_template('userprofile.html', user_exercises = user_excercises)    
-
-
 
 
 
