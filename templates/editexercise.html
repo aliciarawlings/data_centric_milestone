@@ -6,9 +6,13 @@
 <div class="row">
 <div class="input-field col s12">
     <select id ="muscle_categories" name="muscle_categories">
-      <option value="" disabled selected>Choose your option</option>
+      
       {% for muscles in muscle_categories %}
-        <option value="{{ muscles.muscle_category}}">{{ muscles.muscle_category}}</option>
+      {% if muscles.muscle_categories == exercises.muscle_category %}
+        <option value="{{ exercises.muscle_category}}" selected>{{ muscles.muscle_category}}</option>
+        {% else %}
+           <option value="{{ exercises.muscle_category}}" >{{muscles.muscle_category}}</option>
+        {%endif%}
       {% endfor %}
     </select>
     <label>Muscle Category</label>
@@ -20,32 +24,38 @@
       <div class="row">
         <div class="input-field col s12"  id="add_more">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="exercise_type" name="exercise_type">
+          <input type="text" id="exercise_type" name="exercise_type" value="{{exercises.exercise_type}}">
           <label for="autocomplete-input">Exercise Name</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps"  name="amount_of_reps"class="autocomplete">
+          <input type="text" id="amount_of_reps"  name="amount_of_reps"class="autocomplete" value="{{exercises.amount_of_reps}}">
           <label for="autocomplete-input">Amount of Reps</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_sets" name="amount_of_sets">
+          <input type="text" id="amount_of_sets" name="amount_of_sets"value="{{exercises.amount_of_sets}}">
           <label for="autocomplete-input">Amount of Sets</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="text" id="exercise_duration" name="exercise duration">
+          <input type="text" id="exercise_duration" name="exercise duration" value="{{exercises.exercise_duration}}">
           <label for="autocomplete-input">Exercise Duration</label>
+          
+         <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea2" class="materialize-textarea" data-length="250" id="workout_description" name="workout_description"value="{{exercises.workout_description}}"></textarea>
+            <label for="textarea2">Workout Description</label>
+          </div>
         
         </div>
       </div>
     </div>
   </div>
-    <button class="btn waves-effect waves-light" type="submit">Add Your Workout
+    <button class="btn waves-effect waves-light" type="submit">Update Your Workout
       <i class="material-icons right">add_box</i>
     </button>
   </form>
