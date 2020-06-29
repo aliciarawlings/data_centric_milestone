@@ -56,7 +56,6 @@ def add_exercise():
 @app.route('/insert_exercise', methods=['POST'])
 def insert_exercise():
     exercises = mongo.db.exercises
-
     exercise_request = request.form.to_dict()
     exercise_request['user_id'] = ObjectId(session['user_id'])
     exercises.insert_one(exercise_request)
@@ -152,6 +151,7 @@ def login():
 def register():
     if request.method =='POST':
         users=mongo.db.users
+        #checking to see if name is already registered in the database
         present_user = users.find_one({'name': request.form['username']})
         
 

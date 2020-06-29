@@ -8,7 +8,7 @@
     <select id ="muscle_categories" name="muscle_categories">
       
       {% for muscles in muscle_categories %}
-      {% if muscles.muscle_categories == exercises.muscle_category %}
+      {% if muscles.muscle_category == exercises.muscle_category %}
         <option value="{{ exercises.muscle_category}}" selected>{{ muscles.muscle_category}}</option>
         {% else %}
            <option value="{{ exercises.muscle_category}}" >{{muscles.muscle_category}}</option>
@@ -47,7 +47,7 @@
           
          <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea2" class="materialize-textarea" data-length="250" id="workout_description" name="workout_description"value="{{exercises.workout_description}}"></textarea>
+            <input type="text" id="textarea2" class="materialize-textarea" data-length="250" id="workout_description" name="workout_description"value="{{exercises.workout_description}}">
             <label for="textarea2">Workout Description</label>
           </div>
         
