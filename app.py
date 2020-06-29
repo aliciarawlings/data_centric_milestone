@@ -89,7 +89,7 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
-    exercises.update({'_id': ObjectId(exercises_id)},
+    exercises.update({'_id': ObjectId(exercises_id )},
     {
 
     'exercise_type':request.form.get('exercise_type'),

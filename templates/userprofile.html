@@ -29,15 +29,16 @@
         <div class="card-image">
         image
         </div>
-        <span class="card-title">{{muscle_category}}</span>
-        <h6>{{user_exercise.muscle_category}}</h6>
+        <span class="card-title"><strong>{{user_exercise.muscle_category}}</strong></span>
         </div>
         <ul>
-       <li> {{ user_exercise.exercise_type }}</li>
-        <li> {{ user_exercise.amount_of_sets}}</li>
-        <li> {{user_exercise.amount_of_reps}}</li>
-        <li>{{user_exercise.exercise_duration}}</li>
-        <li>{{user_exercise.workout_description}}</li>
+
+       <li> <i class="small material-icons">title</i><strong>Exercise Name :</strong>{{ user_exercise.exercise_type }}</li>
+        <li> <i class="small material-icons">rotate_right</i><strong>How Many Reps :</strong>{{user_exercise.amount_of_reps}}</li>
+        <li> <i class="small material-icons">loop</i><strong>How Many Sets:</strong>{{ user_exercise.amount_of_sets}}</li>
+        <li><i class="small material-icons">timer</i><strong>Duration : </strong>{{user_exercise.exercise_duration}}</li>
+        <h6><strong>Description :</strong></h6>
+        <li><i class="small material-icons">assignment</i>{{user_exercise.workout_description}}</li>
          </ul>
         <a href="{{url_for('edit_exercise', user_exercise_id=user_exercise._id)}}" class="waves-effect waves-light btn">Edit</a>
         <a href="{{url_for('delete_exercise', user_exercise_id=user_exercise._id)}}" class="waves-effect waves-light btn">Delete</a>
