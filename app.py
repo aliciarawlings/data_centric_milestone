@@ -89,16 +89,17 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
+    
     exercises.update({'_id': ObjectId(exercises_id )},
     {
+        'user_id': ObjectId(session['user_id']),
+        'exercise_type':request.form.get('exercise_type'),
+        'amount_of_reps':request.form.get('amount_of_reps'),
+        'amount_of_sets':request.form.get('amount_of_sets'),
+        'exercise_duration':request.form.get('exercise_duration'),
+        'workout_description':request.form.get('workout_description')
+    })
 
-    'exercise_type':request.form.get('exercise_type'),
-    'amount_of_reps':request.form.get('amount_of_reps'),
-    'amount_of_sets':request.form.get('amount_of_sets'),
-    'exercise_duration':request.form.get('exercise_duration'),
-    'workout_description':request.form.get('workout_description')
-
-})
     return redirect(url_for('userprofile'))
 
 
@@ -157,8 +158,9 @@ def register():
 
         if present_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
-            users.insert({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
-            session['username']= request.form['username']
+            user = users.insert({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
+            session['username'] = request.form['username']
+            print (user)
             return redirect('userprofile')
            
             
