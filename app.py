@@ -154,19 +154,15 @@ def register():
         users=mongo.db.users
         #checking to see if name is already registered in the database
         present_user = users.find_one({'name': request.form['username']})
-        
 
         if present_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
-            user = users.insert({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
+            user_id = users.insert_one({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
             session['username'] = request.form['username']
-            print (user)
+            session['user_id'] = str(user_id.inserted_id)
             return redirect('userprofile')
-           
-            
 
-        return 'That username already exists!' 
-
+        return 'That username already exists!'
 
     return render_template('register.html')    
 
