@@ -4,7 +4,8 @@ import os
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-
+from bson.binary import Binary
+import base64
 
 if os.path.exists("env.py"):
     import env
@@ -30,15 +31,17 @@ def index_page():
 # Displays all exercises added to the database
 @app.route('/get_exercises/<selected_category>')
 def get_exercises(selected_category):
-    all_exercises = mongo.db.exercises.find()
-    return render_template('exercises.html', exercises=all_exercises,selected_category=selected_category)
+    all_exercises = list(mongo.db.exercises.find())
+    for exercises in all_exercises:
+      exercises["exercise_image"] = exercises["exercise_image"].decode()
+    print(all_exercises)
+    return render_template('exercises.html', exercises=all_exercises, selected_category=selected_category)
 
 
-
-#combines all documents within the exercise database which have matching muscle_categories.
+# combines all documents within the exercise database which have matching muscle_categories.
 @app.route('/get_exercises/<muscle_category_id>')
 def get_exercise_category(muscle_category_id):
-    the_muscle_category= mongo.db.exercises.find_one({"_id":ObjectId(muscle_category_id)})
+    the_muscle_category = mongo.db.exercises.find_one( {"_id": ObjectId(muscle_category_id)})
     return render_template("exercises.html",exercises=the_muscle_category)
     
 
@@ -46,7 +49,6 @@ def get_exercise_category(muscle_category_id):
 # Form Page to allow users to add an exercise
 @app.route('/add_exercise')
 def add_exercise():
-    
     return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
 
 
@@ -58,11 +60,17 @@ def insert_exercise():
     exercises = mongo.db.exercises
     exercise_request = request.form.to_dict()
     exercise_request['user_id'] = ObjectId(session['user_id'])
+    print(request.files)
+    encoded_string = base64.b64encode(request.files["exercise_image"].read())
+    exercise_request["exercise_image"] = encoded_string
     exercises.insert_one(exercise_request)
+   
     return redirect(url_for('userprofile'))
 
 
-#this is the logout function so users can logout of their account 
+
+
+# this is the logout function so users can logout of their account 
 @app.route('/logout', methods=['GET'])
 def logout():
     session.clear()
@@ -85,7 +93,7 @@ def edit_exercise(user_exercise_id):
     return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories,user_exercise_id=user_exercise_id)
 
 
-#update the task function
+# update the task function
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
@@ -106,7 +114,7 @@ def update_exercise(exercises_id):
 
 
 
-#delete exercise function
+# delete exercise function
 @app.route('/delete_exercise/<user_exercise_id>')
 def delete_exercise(user_exercise_id):
     mongo.db.exercises.remove({'_id': ObjectId(user_exercise_id)})
@@ -147,12 +155,12 @@ def login():
 
 
 
-#This is the register form which posts all the users data to the database. Password
+# This is the register form which posts all the users data to the database. Password
 @app.route('/register', methods=['POST','GET'])
 def register():
     if request.method =='POST':
         users=mongo.db.users
-        #checking to see if name is already registered in the database
+        # checking to see if name is already registered in the database
         present_user = users.find_one({'name': request.form['username']})
 
         if present_user is None:
@@ -173,10 +181,17 @@ def register():
 
 # The users Profile they see when they login 
 @app.route('/userprofile')
-def userprofile():
-    user_excercises = mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) })
-    print (user_excercises)
-    return render_template('userprofile.html', user_exercises = user_excercises)    
+def userprofile():     
+    # converts cursor to a
+    user_exercises = list(mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) }))
+    for user_exercise in user_exercises:
+        user_exercise["exercise_image"]= user_exercise["exercise_image"].decode()
+    print(user_exercises)
+    
+        
+    
+    return render_template('userprofile.html', user_exercises= user_exercises)    
+
 
 
 

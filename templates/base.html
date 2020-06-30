@@ -6,6 +6,7 @@
     <link href ="{{url_for ('static', filename ='css/styles.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +23,7 @@
     <div class="nav-wrapper grey darken-1">
       <a href="#" class="brand-logo right">B&A</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-      {% if session['username'] == True %}
+      {%if session['username'] == True%}
             <li><a href="{{url_for('logout')}}">Logout</a></li>
        {%else%}
            <li><a href="{{url_for('login')}}">Login</a></li>

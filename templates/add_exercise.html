@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2> Add Your Own Exercises </h2>
-<form action="{{url_for('insert_exercise') }}" method="POST" class="col s12">
+<h3> Add Your Own Exercises </h3>
+<form action="{{url_for('insert_exercise') }}" enctype="multipart/form-data" method="POST" class="col s12">
 <div class="row">
 <div class="input-field col s12">
     <select id ="muscle_category" name="muscle_category">
@@ -43,13 +43,13 @@
 
          <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea2" class="materialize-textarea" data-length="600" id="workout_description" name="workout_description"></textarea>
+            <textarea id="textarea2" class="materialize-textarea" data-length="1000" id="workout_description" name="workout_description"></textarea>
             <label for="textarea2">Workout Description</label>
           </div>
            <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="url" pattern="https?://.+" title="Include http://" id="add_image" name="add_image"required data-validation-required-message="Field Required">
+          <input type="file" id="exercise_image" name="exercise_image"required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Add Image</label>
           
 

@@ -3,21 +3,26 @@
 {% block content %}
 
 
+<div class="container">
 
  
+   <h3>Workouts</h3>
    
   {% for muscle_category in exercises %}
   {% if muscle_category.muscle_category == selected_category %}
-
+      
 
 
   <div class="row">
     <div class="col s12 m6">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">{{muscle_category.exercise_type}}</span>
+            <span class="card-title">{{muscle_category.exercise_type}}</span>
           <p>I am a very simple card. I am good at containing small bits of information.
           I am convenient because I require little markup to use effectively.</p>
+          <div class="image">
+           <img alt="sample" class="card_image" src="data:image/png;base64,{{muscle_category.exercise_image}}">
+           </div>
         </div>
         <div class="card-action">
           <a href="#">This is a link</a>
@@ -27,7 +32,7 @@
     </div>
     </div>
 
-
+</div>
  
   
     {% endif %}

@@ -1,24 +1,7 @@
-h2 {
+h2,h3,h4,h5,h6 {
     text-align:center;
+    font-family: 'Lora', serif;
 }
-
-
-    
-
-
-.img_text .img_container{
-         position: absolute;
-        z-index: 999;
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        top: 30%; 
-        text-align: center;
-        width: 60%; 
-}
-
-
-
 
 .profile_avatar {
   vertical-align: middle;
@@ -31,3 +14,9 @@ h2 {
     text-align:center;
     
 }
+
+.card_image {
+    width:150px;
+    height:150px;
+}
+
