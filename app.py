@@ -61,6 +61,7 @@ def insert_exercise():
     exercise_request = request.form.to_dict()
     exercise_request['user_id'] = ObjectId(session['user_id'])
     print(request.files)
+    #image has to be encoded using base64 in order to be sent to database,file then needs to be read. 
     encoded_string = base64.b64encode(request.files["exercise_image"].read())
     exercise_request["exercise_image"] = encoded_string
     exercises.insert_one(exercise_request)
@@ -97,16 +98,21 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
-    
+
     exercises.update({'_id': ObjectId(exercises_id )},
-    {
+
+       
+    {   
+        
         'user_id': ObjectId(session['user_id']),
         'exercise_type':request.form.get('exercise_type'),
         'amount_of_reps':request.form.get('amount_of_reps'),
         'amount_of_sets':request.form.get('amount_of_sets'),
         'exercise_duration':request.form.get('exercise_duration'),
-        'workout_description':request.form.get('workout_description')
+        'workout_description':request.form.get('workout_description'),
+        'exercise_image':request.form.get()
     })
+    
 
     return redirect(url_for('userprofile'))
 
@@ -162,7 +168,7 @@ def register():
         users=mongo.db.users
         # checking to see if name is already registered in the database
         present_user = users.find_one({'name': request.form['username']})
-
+      #username is stored in session cookie as to eliminate the need to fetch the user information from the database at all times.Password is always hashed with gensalt. 
         if present_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
             user_id = users.insert_one({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
@@ -182,7 +188,9 @@ def register():
 # The users Profile they see when they login 
 @app.route('/userprofile')
 def userprofile():     
-    # converts cursor to a
+    #retrieves exercises from the database that users created and displays on userprofile and search exercises page
+    #cursor converted to a list so image in database can be decoded from binary and displayed.
+    #for loop iterates through exercise_images
     user_exercises = list(mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) }))
     for user_exercise in user_exercises:
         user_exercise["exercise_image"]= user_exercise["exercise_image"].decode()
