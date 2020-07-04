@@ -110,7 +110,7 @@ def update_exercise(exercises_id):
         'amount_of_sets':request.form.get('amount_of_sets'),
         'exercise_duration':request.form.get('exercise_duration'),
         'workout_description':request.form.get('workout_description'),
-        'exercise_image':request.form.get()
+        'exercise_image':base64.b64encode(request.files["exercise_image"].read())
     })
     
 

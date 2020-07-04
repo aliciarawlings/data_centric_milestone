@@ -20,3 +20,16 @@ h2,h3,h4,h5,h6 {
     height:350px;
 }
 
+
+
+.love:hover {
+    background-color:#d81b60;
+
+}
+
+#countButton{
+  padding: 5px 5px;
+}
+#resetButton{
+  padding: 5px 5px;
+}
