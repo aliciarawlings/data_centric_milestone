@@ -16,20 +16,9 @@ h2,h3,h4,h5,h6 {
 }
 
 .card_image {
-    width:350px;
-    height:350px;
+    width:150px;
+    height:150px;
 }
 
 
 
-.love:hover {
-    background-color:#d81b60;
-
-}
-
-#countButton{
-  padding: 5px 5px;
-}
-#resetButton{
-  padding: 5px 5px;
-}

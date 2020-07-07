@@ -9,9 +9,9 @@
       
       {% for muscles in muscle_categories %}
       {% if muscles.muscle_category == exercises.muscle_category %}
-        <option value="{{ exercises.muscle_category}}" selected>{{ muscles.muscle_category}}</option>
+        <option value="{{ exercises.muscle_category}}">{{ muscles.muscle_category}}</option>
         {% else %}
-           <option value="{{ exercises.muscle_category}}" >{{muscles.muscle_category}}</option>
+           <option value="{{exercises.muscle_category}}" >{{muscles.muscle_category}}</option>
         {%endif%}
       {% endfor %}
     </select>
@@ -53,8 +53,8 @@
         <div class="row">
           <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="file" id="exercise_image" name="exercise_image">
-          <label for="autocomplete-input">Add Image</label>
+          <input type="file" id="exercise_image" name="exercise_image" value="{{exercises.exercise_image}}">
+          
          </div>
         </div>
       </div>

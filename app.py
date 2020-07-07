@@ -98,13 +98,15 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
-
+    muscle_categories = mongo.db.muscle_categories
+    muscle_categories.update({'_id':ObjectId(muscle_category)}),
     exercises.update({'_id': ObjectId(exercises_id )},
 
        
     {   
         
         'user_id': ObjectId(session['user_id']),
+        'muscle_category':request.form.get('muscle_category'),
         'exercise_type':request.form.get('exercise_type'),
         'amount_of_reps':request.form.get('amount_of_reps'),
         'amount_of_sets':request.form.get('amount_of_sets'),
