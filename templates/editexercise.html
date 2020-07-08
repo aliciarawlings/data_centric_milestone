@@ -5,13 +5,13 @@
 <form action="{{url_for('update_exercise',exercises_id=exercises._id) }}" enctype="multipart/form-data" method="POST" class="col s12">
 <div class="row">
 <div class="input-field col s12">
-    <select id ="muscle_categories" name="muscle_categories">
+    <select id ="muscle_category" name="muscle_category">
       
       {% for muscles in muscle_categories %}
       {% if muscles.muscle_category == exercises.muscle_category %}
-        <option value="{{ exercises.muscle_category}}">{{ muscles.muscle_category}}</option>
+        <option value="{{ exercises.muscle_category}}"selected>{{ muscles.muscle_category}}</option>
         {% else %}
-           <option value="{{exercises.muscle_category}}" >{{muscles.muscle_category}}</option>
+           <option value="{{muscles.muscle_category}}" >{{muscles.muscle_category}}</option>
         {%endif%}
       {% endfor %}
     </select>
@@ -42,7 +42,7 @@
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="text" id="exercise_duration" name="exercise duration" value="{{exercises.exercise_duration}}">
+          <input type="number" placeholder ="Enter time in minutes"id="exercise_duration" name="exercise_duration" value="{{exercises.exercise_duration}}">
           <label for="autocomplete-input">Exercise Duration</label>
           
          <div class="row">
