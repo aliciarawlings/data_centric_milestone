@@ -20,30 +20,30 @@
       <div class="row">
         <div class="input-field col s12"  id="add_more">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="exercise_type" name="exercise_type"required data-validation-required-message="Field Required"style="text-transform: capitalize;">
+          <input type="text" id="exercise_type" name="exercise_type"required data-validation-required-message="Field Required" maxlength="20"style="text-transform: capitalize;">
           <label for="autocomplete-input">Exercise Name</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps"  name="amount_of_reps"class="autocomplete" required data-validation-required-message="Field Required">
+          <input type="text" id="amount_of_reps"  maxlength="3"name="amount_of_reps"class="autocomplete" required data-validation-required-message="Field Required">
           <label for="autocomplete-input">Amount of Reps</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_sets" name="amount_of_sets"required data-validation-required-message="Field Required">
+          <input type="text" id="amount_of_sets" name="amount_of_sets"required data-validation-required-message="Field Required" maxlength="3">
           <label for="autocomplete-input">Amount of Sets</label>
         </div>
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="number" id="exercise_duration" placeholder ="Add Duration in Minutes"name="exercise_duration" required data-validation-required-message="Field Required">
+          <input type="number" id="exercise_duration" placeholder ="Add Duration in Minutes"name="exercise_duration" required data-validation-required-message="Field Required" maxlength="3">
           <label for="autocomplete-input">Exercise Duration</label>
 
          <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea2" class="materialize-textarea" data-length="2000" id="workout_description" name="workout_description"></textarea>
+            <textarea id="textarea2" class="materialize-textarea" data-length="5000" maxlength="5000" id="workout_description" name="workout_description"></textarea>
             <label for="textarea2">Workout Description</label>
           </div>
         <div class="row">
