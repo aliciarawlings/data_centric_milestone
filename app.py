@@ -33,8 +33,7 @@ def index_page():
 def get_exercises(selected_category):
     all_exercises = list(mongo.db.exercises.find())
     for exercises in all_exercises:
-      exercises["exercise_image"] = exercises["exercise_image"].decode()
-    print(all_exercises)
+        exercises["exercise_image"] = exercises["exercise_image"].decode()
     return render_template('exercises.html', exercises=all_exercises, selected_category=selected_category)
 
 
@@ -98,24 +97,21 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
-    muscle_categories = mongo.db.muscle_categories
-    muscle_categories.update({'_id':ObjectId(muscle_category)}),
-    exercises.update({'_id': ObjectId(exercises_id )},
-
-       
-    {   
-        
-        'user_id': ObjectId(session['user_id']),
-        'muscle_category':request.form.get('muscle_category'),
-        'exercise_type':request.form.get('exercise_type'),
-        'amount_of_reps':request.form.get('amount_of_reps'),
-        'amount_of_sets':request.form.get('amount_of_sets'),
-        'exercise_duration':request.form.get('exercise_duration'),
-        'workout_description':request.form.get('workout_description'),
-        'exercise_image':base64.b64encode(request.files["exercise_image"].read())
-    })
     
+    update_exercise_data = {
+        'user_id': ObjectId(session['user_id']),
+        'muscle_category': request.form.get('muscle_category'),
+        'exercise_type': request.form.get('exercise_type'),
+        'amount_of_reps': request.form.get('amount_of_reps'),
+        'amount_of_sets': request.form.get('amount_of_sets'),
+        'exercise_duration': request.form.get('exercise_duration'),
+        'workout_description': request.form.get('workout_description'),
+    }
+    if request.files["exercise_image"]:
+        update_exercise_data['exercise_image'] =base64.b64encode(request.files["exercise_image"].read())
 
+    exercises.update({'_id': ObjectId(exercises_id )}, { "$set": update_exercise_data })
+    
     return redirect(url_for('userprofile'))
 
 
@@ -196,7 +192,7 @@ def userprofile():
     user_exercises = list(mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) }))
     for user_exercise in user_exercises:
         user_exercise["exercise_image"]= user_exercise["exercise_image"].decode()
-    print(user_exercises)
+    
     
         
     
