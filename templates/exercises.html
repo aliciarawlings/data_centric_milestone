@@ -8,15 +8,15 @@
     == selected_category %}
 
   <div class="col s12 m6">
-      <div class="card blue-grey darken-1 hoverable card large">
+      <div class="card grey darken-2 hoverable card medium">
        <div class="card-image waves-effect waves-block waves-light" >
-        <img alt="sample" class="card_image responsive-img activator "src="data:image/png;base64,{{muscle_category.exercise_image}}"/>
+        <img alt="sample" class="responsive-img activator" src="data:image/png;base64,{{muscle_category.exercise_image}}"/>
       </div>
         <div class="card-content white-text">
-          <span class="card-title activator grey-text text-darken-4 ">Click{{muscle_category.exercise_type}}</span>
+          <span class="card-title activator grey-text text-green">Click For More</span>
           <p><a href="#"></a></p>
           <spn class="card-title"><strong>{{
-              muscle_category.muscle_category}}</strong></span>
+              muscle_category.exercise_type}}</strong></span>
               </div>
         
           <div class="card-reveal">
@@ -46,10 +46,7 @@
             </ul>
         </div>
           <div class="card-action">
-        <div class="likebtn">
-         <button id="like_btn"class="waves-effect waves-light btn btn-floating pink lighten-1"><i class="material-icons left">favorite</i>Like</button>
-          <input id="likenumber" type="number" value="0"> 
-         </div>
+       
       </div>
     </div>
     </div>

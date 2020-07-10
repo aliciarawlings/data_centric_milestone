@@ -97,7 +97,7 @@ def edit_exercise(user_exercise_id):
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
     exercises = mongo.db.exercises
-    
+    # this is the update object which contains all the fields within the edit form which I would like to update.
     update_exercise_data = {
         'user_id': ObjectId(session['user_id']),
         'muscle_category': request.form.get('muscle_category'),
@@ -107,9 +107,10 @@ def update_exercise(exercises_id):
         'exercise_duration': request.form.get('exercise_duration'),
         'workout_description': request.form.get('workout_description'),
     }
+    #if statement to see whether or not the user has selected a new image, if yes then we update the "update_exercise_data" object and encode it. 
     if request.files["exercise_image"]:
         update_exercise_data['exercise_image'] =base64.b64encode(request.files["exercise_image"].read())
-
+                                                    #using $set allows me to select which fields I want updated.
     exercises.update({'_id': ObjectId(exercises_id )}, { "$set": update_exercise_data })
     
     return redirect(url_for('userprofile'))

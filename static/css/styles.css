@@ -3,27 +3,9 @@ h2,h3,h4,h5,h6 {
     font-family: 'Lora', serif;
 }
 
-.profile_avatar {
-  vertical-align: middle;
-  width: 250px;
-  height: 250px;
-  
-}
+
 
 .exercise_heading{
     text-align:center;
     
 }
-
-.card_image {
-    width:350px;
-    height:350px;
-}
-
-.likebtn{
-    width: 20%;
-    margin:auto;
-}
-
-
-

@@ -4,6 +4,3 @@ btnAdd.addEventListener("click", ()=> {
 
 });
 
-
-
-
