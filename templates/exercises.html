@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container">
-  <h3>Workouts</h3>
+<div class="container ">
+  <h3><u>Workouts</u></h3>
 
   <div class="row">
     {% for muscle_category in exercises %} {% if muscle_category.muscle_category
     == selected_category %}
 
   <div class="col s12 m6">
-      <div class="card grey darken-2 hoverable card medium">
+      <div class="card black hoverable card medium">
        <div class="card-image waves-effect waves-block waves-light" >
         <img alt="sample" class="responsive-img activator" src="data:image/png;base64,{{muscle_category.exercise_image}}"/>
       </div>
