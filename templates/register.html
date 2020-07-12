@@ -8,9 +8,15 @@
     <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
-    <div class="container">
-      <h1>Register Now!</h1>
-      <br>
+    <div class="container center-align">
+    <div class="row">
+    <div class="col s12 m6 offset-m3">
+    <div class="card">
+    <div class="card-action black white-text valign-wrapper">
+      <h3>Register Now!</h3>
+      </div>
+      <div class="card-content">
+      <div class="form-field">
       <form action="{{url_for('register')}}" method="POST">
         <input type="text" placeholder="Username" name="username" value="{{
           request.form.username }}" data-length="20">
@@ -18,11 +24,14 @@
           request.form.password }}">
           <input type="email" placeholder="Email" name="email" value="{{
           request.form.email }}">
-        <input class="btn btn-default" type="submit" value="Register">
+        <input class="btn-large black btn-default" type="submit" value="Register">
       </form>
+      </div>
       {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
       {% endif %}
+    </div>
+    </div>
     </div>
   </body>
 </html>
