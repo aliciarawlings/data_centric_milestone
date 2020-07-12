@@ -8,19 +8,29 @@
     <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
-    <div class="container">
-      <h1>Please login</h1>
-      <br>
+    <div class="container center-align">
+    <div class="row">
+    <div class ="col s12 m6 offset-m3">
+    <div class="card">
+    <div class="card-action black white-text valign-wrapper">
+      <h3>Please login</h3>
+      </div>
+      <div class="card-content">
+      <div class="form-field">
       <form action="{{url_for('login')}}" method="POST">
         <input type="text" placeholder="Username" name="username" value="{{
           request.form.username }}">
          <input type="password" placeholder="Password" name="password" value="{{
           request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
+        <input class="btn-large btn-default" type="submit" value="Login">
       </form>
+      </div>
       {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
       {% endif %}
+      </div>
+    </div>
+    </div>
     </div>
   </body>
 </html>
