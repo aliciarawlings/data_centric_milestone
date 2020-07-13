@@ -194,12 +194,10 @@ def userprofile():
     #cursor converted to a list so image in database can be decoded from binary and displayed.
     #for loop iterates through exercise_images
     user_exercises = list(mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) }))
+    user_info = mongo.db.users.find({'_id':ObjectId(session['user_id'])}, {'name':1, 'email':1})
     for user_exercise in user_exercises:
         user_exercise["exercise_image"]= user_exercise["exercise_image"].decode()
-    return render_template('userprofile.html', user_exercises= user_exercises)    
-
-
-
+    return render_template('userprofile.html', user_exercises= user_exercises,user_info=user_info)    
 
 
 
