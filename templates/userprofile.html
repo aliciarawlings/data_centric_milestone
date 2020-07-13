@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<div class="container ">
+<div class="container">
 <div class="row">
  <div class="col s12">
 <h4 class="user_text"><strong>Welcome to your Profile</strong> </h4>
@@ -16,16 +16,16 @@
     </div>
     </div>
 
-
+<div class="container">
     <h5 class="exercise_heading"> Your Exercises</h5>
     <div class="row"> 
     {% for user_exercise in user_exercises %}
-    <div class="col s12 m6">
-      <div class="card black hoverable card large">
-      <div class="card-image waves-effect waves-block waves-light" >
-      <img class=" activator responsive-img" src="data:image/png;base64,{{user_exercise.exercise_image}}">
+    <div class="col s12 l6 xl6 m6">
+      <div class="card black hoverable card small">
+      <div class="card-image swaves-effect waves-block waves-light" >
+      <img class=" activator" src="data:image/png;base64,{{user_exercise.exercise_image}}">
       </div>
-     <div class="card-content white-text ">
+     <div class="card-content card_size white-text ">
         <span class="card-title activator grey-text white-text">View More<i class="material-icons right">more_vert</i></span>
       <p><a href="#"></a></p>
           <span class="card-title"><strong>{{user_exercise.exercise_type}}</strong></span>
@@ -52,26 +52,18 @@
             <li><i class="small material-icons">assignment</i
               >{{user_exercise.workout_description}}</li>
                </ul>
-
-                <div class="card-action">
-       <a href="{{url_for('edit_exercise', user_exercise_id=user_exercise._id)}}"
+    <a href="{{url_for('edit_exercise', user_exercise_id=user_exercise._id)}}"
             class="waves-effect waves-light white-text btn green">Edit</a>
           <a href="{{url_for('delete_exercise', user_exercise_id=user_exercise._id)}}"
             class="waves-effect waves-light btn red white-text"
             >Delete</a>
-        </div>
       </div>
     </div>
+ </div>
+{% endfor %}    
+    
 </div>
-
-
-       
-   
-    
-
-    {% endfor %}    
-    
-
+</div>
  
 
    

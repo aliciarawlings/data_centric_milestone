@@ -172,7 +172,10 @@ def register():
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
             user_id = users.insert_one({'name': request.form['username'],'password': hashpass, 'email':request.form['email']})
             session['username'] = request.form['username']
+            #inserts the users id to each submission from their account
             session['user_id'] = str(user_id.inserted_id)
+            
+
             return redirect('userprofile')
 
         return 'That username already exists!'
@@ -193,11 +196,9 @@ def userprofile():
     user_exercises = list(mongo.db.exercises.find({ 'user_id': ObjectId(session['user_id']) }))
     for user_exercise in user_exercises:
         user_exercise["exercise_image"]= user_exercise["exercise_image"].decode()
-    
-    
-        
-    
     return render_template('userprofile.html', user_exercises= user_exercises)    
+
+
 
 
 
