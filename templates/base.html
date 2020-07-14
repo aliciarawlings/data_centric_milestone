@@ -5,7 +5,7 @@
 <head>
     <link href ="{{url_for ('static', filename ='css/styles.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -23,21 +23,33 @@
   <nav>
     <div class="nav-wrapper black">
       <a href="#" class="brand-logo right">B&A</a>
-     <ul id="nav-mobile" class="left hide-on-med-and-down">
+     <a href="#" data-target="mobile-links" class="sidenav-trigger"><i class="material-icons">menu</i></a>   
+     <ul class="left hide-on-med-and-down">
      {%if session['username']%}
             <li><a href="{{url_for('logout')}}">Logout</a></li>
             <li><a href="{{url_for('userprofile')}}">Profile</a></li>
        {%else%}
            <li><a href="{{url_for('login')}}">Login</a></li>
         {% endif %}
-       
-         <li><a href="{{url_for('index_page')}}">Home</a></li>
+        <li><a href="{{url_for('index_page')}}">Home</a></li>
         <li><a href="{{url_for('register')}}">Register</a></li>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Search Exercises<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
-    </nav>
- 
+ </nav>  
+
+   <ul class="sidenav" id="mobile-links">
+    {%if session['username']%}
+     <li><a href="{{url_for('logout')}}">Logout</a></li>
+     <li><a href="{{url_for('userprofile')}}">Profile</a></li>
+       {%else%}
+        <li><a href="{{url_for('login')}}">Login</a></li>
+        {% endif %}
+      <li><a href="{{url_for('index_page')}}">Home</a></li>
+      <li><a href="{{url_for('register')}}">Register</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Search Exercises<i class="material-icons right">arrow_drop_down</i></a></li>
+ </ul>
+
 
 
   
@@ -45,6 +57,7 @@
     {% block content %} 
     {% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src ="{{url_for ('static', filename ='script/script.js')}}"></script>
     
@@ -57,8 +70,10 @@
             $('.slider').slider();
             $('input#input_text, textarea#textarea2').characterCounter("Too many");
             $('.carousel').carousel();
-            $('.modal').modal();
-            $('.materialboxed').materialbox();
+             $('.sidenav').sidenav();
+             
+
+        
         
         });
 

@@ -49,3 +49,6 @@ h2,h3,h4,h5,h6 {
     
 }
 
+#card_font,li{
+    font-family: 'Roboto Condensed', sans-serif;
+}
