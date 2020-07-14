@@ -10,18 +10,13 @@ h2,h3,h4,h5,h6 {
     font-family: 'Fondamento', cursive;
     
 }
-
-body{
-   background-color:#a0c3d2;
-}
-
 .user_page_text{
     font-family: 'Fondamento', cursive;
 }
 
 .img-size {
     object-fit: contain;
-    /* object-position: top; */
+    
     max-height: 300px;
     min-height: 300px;
 }
@@ -30,7 +25,27 @@ body{
     max-height: 300px;
 }
 
-.card-title-size {
-    background-color: black !important;
-    padding: 16px;
+.user_div{
+  width: 500px;
+  height: 400px;
+  padding: 50px;
+  background-color:#a0c3d2;
+  font-family: 'Do Hyeon', sans-serif;
+  font-weight:900;
+  
+  
 }
+
+.acc_font,li{
+  font-family: 'Do Hyeon', sans-serif;
+  font-weight:900;
+
+}
+
+
+.avatar_img{
+    width:150px;
+    height:150px;
+    
+}
+
