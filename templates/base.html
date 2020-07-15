@@ -12,7 +12,7 @@
 
 <body>
 <header>
- <ul id="dropdown1" class="dropdown-content">
+ <ul id="dropdown2" class="dropdown-content">
   <li><a href="{{url_for('get_exercises', selected_category ='Chest')}}">Chest</a></li>
   <li><a href="{{url_for('get_exercises', selected_category= 'Arms')}}">Arms</a></li>
   <li><a href="{{url_for('get_exercises', selected_category= 'Abdominals')}}">Abdominal</a></li>
@@ -33,7 +33,7 @@
         {% endif %}
         <li><a href="{{url_for('index_page')}}">Home</a></li>
         <li><a href="{{url_for('register')}}">Register</a></li>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Search Exercises<i class="material-icons right">arrow_drop_down</i></a></li>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Search Exercises<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
  </nav>  
