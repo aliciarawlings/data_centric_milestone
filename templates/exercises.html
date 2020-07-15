@@ -3,25 +3,25 @@
 
 <div class="container">
   <h3><u>Workouts</u></h3>
-
-  <div class="row">
-    {% for muscle_category in exercises %} {% if muscle_category.muscle_category
+<div class="row">
+         {% for muscle_category in exercises %} {% if muscle_category.muscle_category
     == selected_category %}
 
-  <div class="col s12 l6 xl6 m6">
-      <div class="card black hoverable card medium">
-       <div class="card-image waves-effect waves-block waves-light" >
-        <img alt="sample" class="activator" src="data:image/png;base64,{{muscle_category.exercise_image}}"/>
-      </div>
-        <div class="card-content white-text">
-          <span class="card-title grey-text text-green">Click For More</span>
-          <p><a href="#"></a></p>
-          <span class="card-title"><strong>{{muscle_category.exercise_type}}</strong></span>
-              </div>
-        
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-           <ul >
+      <div class="col s12 l6 xl6 m6">
+        <div class="card card-size hoverable">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img
+              class="activator img-size"
+              src="data:image/png;base64,{{muscle_category.exercise_image}}"
+            />
+            <span class="card-title black">{{muscle_category.exercise_type}}</span>
+          </div>
+    
+      <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"
+              ><i class="material-icons right">close</i></span
+            >
+                     <ul >
             <li>
               <i class="small material-icons">title</i
               ><strong>Exercise Name :</strong>{{ muscle_category.exercise_type }}
@@ -44,16 +44,18 @@
               >{{muscle_category.workout_description}}
             </li> 
             </ul>
-        </div>
-          <div class="card-action">
-       
-      </div>
-    </div>
-    </div>
 
-  {% endif %} {% endfor %}
-	</div>
-</div>
+           
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+ 
+
 
 
 {% endblock %}
