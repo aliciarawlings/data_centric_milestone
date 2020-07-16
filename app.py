@@ -1,4 +1,5 @@
 import pymongo
+import enum 
 import bcrypt
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
@@ -20,6 +21,13 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+class MuscleCategory(enum.Enum):
+    Chest = 1
+    Abdominals = 2
+    Arms = 3
+    Back = 4
+    Shoulders = 5
+    Legs = 6
 
 # homepage
 @app.route('/')
@@ -30,14 +38,16 @@ def index_page():
 
 # Displays all exercises added to the database
 # This route allows users to search via muscle category 
-@app.route('/get_exercises/<selected_category>')
-def get_exercises(selected_category):
-    all_exercises = list(mongo.db.exercises.find())
+@app.route('/get_exercises/<category_id>')
+def get_exercises(category_id):
+    selected_category_name = MuscleCategory(int(category_id)).name
+    print (selected_category_name)
+    all_exercises = list(mongo.db.exercises.find({ "muscle_category": selected_category_name }))
     #for loop iterates through mongo to find relevant image and is then decoded 
     #to be displayed. 
     for exercises in all_exercises:
          exercises["exercise_image"] = exercises["exercise_image"].decode()
-    return render_template('exercises.html', exercises=all_exercises, selected_category=selected_category)
+    return render_template('exercises.html', exercises=all_exercises)
 
 
 # combines all documents within the exercise database which have matching muscle_categories.

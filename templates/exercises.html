@@ -4,8 +4,7 @@
 <div class="container">
   <h3><u>Workouts</u></h3>
 <div class="row">
-         {% for muscle_category in exercises %} {% if muscle_category.muscle_category
-    == selected_category %}
+         {% for muscle_category in exercises %} 
 
       <div class="col s12 l6 xl6 m6">
         <div class="card card-size hoverable">
@@ -49,7 +48,6 @@
           </div>
         </div>
       </div>
-      {% endif %}
       {% endfor %}
     </div>
   </div>
