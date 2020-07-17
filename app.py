@@ -22,18 +22,11 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-class add_exercise_form(Form):
-    exercise_type= StringField('exercise_type',[validators.length(min=4, max=25)])
 
 
-class MuscleCategory(enum.Enum):
-    Chest = 1
-    Abdominals = 2
-    Arms = 3
-    Back = 4
-    Shoulders = 5
-    Legs = 6
-
+class MuscleCategory:
+    categories = ["Chest", "Abdominals", "Arms", "Back", "Shoulders", "Legs"]
+  
 # homepage
 @app.route('/')
 @app.route('/index_page')
@@ -45,13 +38,14 @@ def index_page():
 # This route allows users to search via muscle category 
 @app.route('/get_exercises/<category_id>')
 def get_exercises(category_id):
-    selected_category_name = MuscleCategory(int(category_id)).name
-    all_exercises = list(mongo.db.exercises.find({ "muscle_category": selected_category_name }))
-    #for loop iterates through mongo to find relevant image and is then decoded 
-    #to be displayed. 
-    for exercises in all_exercises:
-         exercises["exercise_image"] = exercises["exercise_image"].decode()
-    return render_template('exercises.html', exercises=all_exercises)
+    if category_id in MuscleCategory.categories:
+        all_exercises = list(mongo.db.exercises.find({ "muscle_category": category_id }))
+        #for loop iterates through mongo to find relevant image and is then decoded 
+        #to be displayed. 
+        for exercises in all_exercises:
+            exercises["exercise_image"] = exercises["exercise_image"].decode()
+        return render_template('exercises.html', exercises=all_exercises)
+    return render_template("404.html")
 
 
 # combines all documents within the exercise database which have matching muscle_categories.
@@ -73,9 +67,6 @@ def add_exercise():
 # this route is used to post the information from the form into the database
 @app.route('/insert_exercise', methods=['POST'])
 def insert_exercise():
-    form=add_exercise_form(request.form)
-    if request.method == 'POST' and form.validate():
-        exercise =(form.exercise_type.data)
     exercises = mongo.db.exercises
     exercise_request = request.form.to_dict()
     exercise_request['user_id'] = ObjectId(session['user_id'])
@@ -108,9 +99,13 @@ def muscle_categories():
 @app.route('/edit_exercise/<user_exercise_id>')
 def edit_exercise(user_exercise_id):
     the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
-    
     all_categories= mongo.db.muscle_categories.find()
-    return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories,user_exercise_id=user_exercise_id)
+    return render_template('editexercise.html', exercises=the_exercise, 
+        muscle_categories=all_categories,user_exercise_id=user_exercise_id)
+      
+
+    
+       
 
 
 # update the task function
@@ -165,7 +160,7 @@ def login():
     users = mongo.db.users
     #looks for user with corresponding username in mongodb
     account_user = users.find_one({'name': request.form['username']})
-    print (account_user)
+    
     #if username is correct, password is checked against the account user name.
     #password is hashed 
     if account_user:
@@ -227,7 +222,9 @@ def userprofile():
     return render_template('userprofile.html', user_exercises= user_exercises,user_info=user_info)    
 
 
-
+@app.route('/404')
+def error_redirect():
+    return render_template("404.html")
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
