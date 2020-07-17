@@ -1,5 +1,6 @@
 import pymongo
 import enum 
+from wtforms import Form, BooleanField, StringField, PasswordField, validators
 import bcrypt
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
@@ -21,6 +22,10 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+class add_exercise_form(Form):
+    exercise_type= StringField('exercise_type',[validators.length(min=4, max=25)])
+
+
 class MuscleCategory(enum.Enum):
     Chest = 1
     Abdominals = 2
@@ -41,7 +46,6 @@ def index_page():
 @app.route('/get_exercises/<category_id>')
 def get_exercises(category_id):
     selected_category_name = MuscleCategory(int(category_id)).name
-    print (selected_category_name)
     all_exercises = list(mongo.db.exercises.find({ "muscle_category": selected_category_name }))
     #for loop iterates through mongo to find relevant image and is then decoded 
     #to be displayed. 
@@ -69,10 +73,12 @@ def add_exercise():
 # this route is used to post the information from the form into the database
 @app.route('/insert_exercise', methods=['POST'])
 def insert_exercise():
+    form=add_exercise_form(request.form)
+    if request.method == 'POST' and form.validate():
+        exercise =(form.exercise_type.data)
     exercises = mongo.db.exercises
     exercise_request = request.form.to_dict()
     exercise_request['user_id'] = ObjectId(session['user_id'])
-    print(request.files)
     #image has to be encoded using base64 in order to be sent to database,file then needs to be read. 
     encoded_string = base64.b64encode(request.files["exercise_image"].read())
     exercise_request["exercise_image"] = encoded_string
@@ -102,6 +108,7 @@ def muscle_categories():
 @app.route('/edit_exercise/<user_exercise_id>')
 def edit_exercise(user_exercise_id):
     the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
+    
     all_categories= mongo.db.muscle_categories.find()
     return render_template('editexercise.html', exercises=the_exercise, muscle_categories=all_categories,user_exercise_id=user_exercise_id)
 
@@ -162,7 +169,6 @@ def login():
     #if username is correct, password is checked against the account user name.
     #password is hashed 
     if account_user:
-        print(request.form['password'].encode('utf-8'))
         if bcrypt.hashpw(request.form['password'].encode('utf-8'), account_user
         ['password']) == account_user['password']:
         #user login is stored in session cookie 

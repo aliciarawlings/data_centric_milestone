@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<title>{%block title%}{%endblock%}Add Exercise B&A </title>
 <h3> Add Your Own Exercises </h3>
 
 <form action="{{url_for('insert_exercise') }}" enctype="multipart/form-data" method="POST" class="col s12">
@@ -41,6 +41,7 @@
           <i class="material-icons prefix">av_timer</i>
           <input type="number" id="exercise_duration" placeholder ="Add Duration in Minutes"name="exercise_duration" required data-validation-required-message="Field Required" maxlength="3">
           <label for="autocomplete-input">Exercise Duration</label>
+          </div>
 
          <div class="row">
           <div class="input-field col s12">
@@ -51,15 +52,19 @@
           <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
           <input type="file" id="exercise_image" name="exercise_image">
-          
-         </div>
+        </div>
         
     </div>
   </div>
+  </div>
+  </div>
+
     <button class="btn black waves-effect waves-light white-text" type="submit">Add Your Workout
       <i class="material-icons right">add_box</i>
     </button>
+    
   </form>
+  
 
 
 

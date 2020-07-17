@@ -8,6 +8,7 @@
       <h3 class="center-align acc_font">Account Information</h3>
       <img class="avatar_img responsive-img" src="static/images/avatar.png" alt="avatar_img">
       {% for info in user_info %}
+      <title>{%block title%}{%endblock%}{{info.name}}'s Profile B&A </title>
       
       <ul>
      <li>Account Username:<i>{{info.name}}</i></li>
