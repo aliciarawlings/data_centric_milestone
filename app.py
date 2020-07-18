@@ -98,11 +98,15 @@ def muscle_categories():
 # this is called once the edit button is clicked, redirects to edit page.
 @app.route('/edit_exercise/<user_exercise_id>')
 def edit_exercise(user_exercise_id):
-    the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
-    all_categories= mongo.db.muscle_categories.find()
-    return render_template('editexercise.html', exercises=the_exercise, 
+      logged_in = True if "username" in session else False
+      if logged_in is False:
+            return render_template ('404.html')
+      the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
+      all_categories= mongo.db.muscle_categories.find()
+      return render_template('editexercise.html', exercises=the_exercise, 
         muscle_categories=all_categories,user_exercise_id=user_exercise_id)
-      
+        
+    
 
     
        
@@ -111,6 +115,9 @@ def edit_exercise(user_exercise_id):
 # update the task function
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
+    logged_in = True if "username" in session else False
+    if logged_in is False:
+            return render_template ('404.html')
     exercises = mongo.db.exercises
     # this is the update object which contains all the fields within the edit form which I would like to update.
     update_exercise_data = {
