@@ -1,7 +1,6 @@
 import pymongo
 import enum 
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
-import bcrypt
+#import bcrypt
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
@@ -21,6 +20,7 @@ app.config["MONGO_DBNAME"] = 'before_and_after'
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
 
 
 
@@ -59,7 +59,7 @@ def get_exercise_category(muscle_category_id):
 # Form Page to allow users to add an exercise
 @app.route('/add_exercise')
 def add_exercise():
-    return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
+     return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
 
 
 
@@ -98,6 +98,8 @@ def muscle_categories():
 # this is called once the edit button is clicked, redirects to edit page.
 @app.route('/edit_exercise/<user_exercise_id>')
 def edit_exercise(user_exercise_id):
+     # Checks if the user is logged in, if they are not, redirect to
+    #404 page
       logged_in = True if "username" in session else False
       if logged_in is False:
             return render_template ('404.html')
@@ -115,6 +117,8 @@ def edit_exercise(user_exercise_id):
 # update the task function
 @app.route('/update_exercise/<exercises_id>', methods=["POST"])
 def update_exercise(exercises_id):
+   # Checks if the user is logged in, if they are not, redirect to
+    #404 page
     logged_in = True if "username" in session else False
     if logged_in is False:
             return render_template ('404.html')
@@ -207,7 +211,7 @@ def register():
 
             return redirect('userprofile')
 
-        return 'That username already exists!'
+        return ('That username already exists!')
 
     return render_template('register.html')    
 
