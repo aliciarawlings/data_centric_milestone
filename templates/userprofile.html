@@ -83,11 +83,14 @@
               class="waves-effect waves-light white-text btn green"
               >Edit</a
             >
-            <a
+            <button type="button" class="btn btn-danger" onclick="confirm_del()">Delete Exercise</button>
+            
+       <!--- <a
               href="{{url_for('delete_exercise', user_exercise_id=user_exercise._id)}}"
               class="waves-effect waves-light btn red white-text"
-              >Delete</a
-            >
+              >Delete</a>
+              <button type="button" class="btn btn-danger" onclick="confirm_del()">Delete Recipe</button>
+        -->
           </div>
         </div>
       </div>
@@ -95,5 +98,20 @@
     </div>
   </div>
   </div>
+ {% for user_exercise in user_exercises %}
+  <script>
+  function confirm_del(){
+        var confirmation = confirm("This process cannot be undone! Are you sure you want to delete this exercise?")
+        if (confirmation == true){
+            window.location.href="{{url_for('delete_exercise', user_exercise_id=user_exercise._id)}}";
+            alert("The exercise has successfully been deleted.");
+        }
+        else {
+            alert("The exercise has not been deleted.");
+        }
+    }
+
+  </script>
+  {% endfor %}
 
   {% endblock %}
