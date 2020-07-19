@@ -38,6 +38,7 @@ def index_page():
 # This route allows users to search via muscle category 
 @app.route('/get_exercises/<category_id>')
 def get_exercises(category_id):
+    #defensive design so all user cant manipulate url by inputting something other than given categories
     if category_id in MuscleCategory.categories:
         all_exercises = list(mongo.db.exercises.find({ "muscle_category": category_id }))
         #for loop iterates through mongo to find relevant image and is then decoded 
@@ -59,6 +60,7 @@ def get_exercise_category(muscle_category_id):
 # Form Page to allow users to add an exercise
 @app.route('/add_exercise')
 def add_exercise():
+    #checks if user is logged in if not 404 is returned
     logged_in = True if "username" in session else False
     if logged_in is False:
         return render_template ('404.html')
@@ -90,14 +92,6 @@ def logout():
     return redirect(url_for('index_page'))
 
 
-
-# This is fetching the muscle categories from the Mongodb
-@app.route('/muscle_categories')
-def muscle_categories():
-    return render_template('exercises.html', muscle_categories=mongo.db.muscle_categories.find())
-
-
-
 # this is called once the edit button is clicked, redirects to edit page.
 @app.route('/edit_exercise/<user_exercise_id>')
 def edit_exercise(user_exercise_id):
@@ -105,7 +99,8 @@ def edit_exercise(user_exercise_id):
     #404 page
       logged_in = True if "username" in session else False
       if logged_in is False:
-        return render_template ('404.html')
+        return render_template('404.html')
+
       the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
       all_categories= mongo.db.muscle_categories.find()
       return render_template('editexercise.html', exercises=the_exercise, 
@@ -124,7 +119,7 @@ def update_exercise(exercises_id):
     #404 page
     logged_in = True if "username" in session else False
     if logged_in is False:
-            return render_template ('404.html')
+        return render_template ('404.html')
     exercises = mongo.db.exercises
     # this is the update object which contains all the fields within the edit form which I would like to update.
     update_exercise_data = {
