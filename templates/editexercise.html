@@ -2,14 +2,15 @@
 {% block content %}
 <title>{%block title%}{%endblock%}B&A|Edit Exercise</title>
 <h2> Edit Exercise</h2>
-<form action="{{url_for('update_exercise',exercises_id=exercises._id) }}" enctype="multipart/form-data" method="POST" class="col s12">
+
+<form action="{{url_for('update_exercise',exercises_id=exercises._id) }}" enctype="multipart/form-data" method="POST">
 <div class="row">
 <div class="input-field col s12">
     <select id ="muscle_category" name="muscle_category">
       
       {% for muscles in muscle_categories %}
       {% if muscles.muscle_category == exercises.muscle_category %}
-        <option value="{{ exercises.muscle_category}}"selected>{{ muscles.muscle_category}}</option>
+        <option value="{{ exercises.muscle_category}}"selected> {{ muscles.muscle_category}}</option>
         {% else %}
            <option value="{{muscles.muscle_category}}" >{{muscles.muscle_category}}</option>
         {%endif%}
@@ -20,49 +21,56 @@
   </div>
 
  <div class="row">
-    <div class="col s12">
-      <div class="row">
-        <div class="input-field col s12"  id="add_more">
+    <div class="input-field col s12"  id="add_more">
           <i class="material-icons prefix">add</i>
           <input type="text" id="exercise_type" name="exercise_type" value="{{exercises.exercise_type}}">
           <label for="autocomplete-input" maxlength="20">Exercise Name</label>
         </div>
+        </div>
+
+
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps"  name="amount_of_reps" maxlength="3"class="autocomplete" value="{{exercises.amount_of_reps}}">
+          <input type="text" id="amount_of_reps"  name="amount_of_reps" maxlength="3" class="autocomplete" value="{{exercises.amount_of_reps}}">
           <label for="autocomplete-input">Amount of Reps</label>
         </div>
+        </div>
+        
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_sets" maxlength="3" name="amount_of_sets"value="{{exercises.amount_of_sets}}">
+          <input type="text" id="amount_of_sets" maxlength="3" name="amount_of_sets" value="{{exercises.amount_of_sets}}">
           <label for="autocomplete-input">Amount of Sets</label>
         </div>
-          <div class="row">
+        </div>
+
+        <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">av_timer</i>
-          <input type="number" maxlength="3"placeholder ="Enter time in minutes"id="exercise_duration" name="exercise_duration" value="{{exercises.exercise_duration}}">
+          <input type="number" maxlength="3" placeholder ="Enter time in minutes" id="exercise_duration" name="exercise_duration" value="{{exercises.exercise_duration}}">
           <label for="autocomplete-input">Exercise Duration</label>
-          
+        </div>
+        <div>
+        
+
          <div class="row">
           <div class="input-field col s12">
-            <input type="text" id="textarea2" class="materialize-textarea" data-length="5000" maxlength="5000" id="workout_description" name="workout_description"value="{{exercises.workout_description}}">
+            <input type="text" class="materialize-textarea" data-length="5000" maxlength="5000" id="workout_description" name="workout_description" value="{{exercises.workout_description}}">
             <label for="textarea2">Workout Description</label>
           </div>
+          <div>
+          
         <div class="row">
           <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
           <input type="file" id="exercise_image" name="exercise_image" value="{{exercises.exercise_image}}">
-          
-         </div>
         </div>
-      </div>
-    </div>
-  </div>
-    <button class="btn black green waves-effect waves-light" type="submit">Update Your Workout
-      <i class="material-icons right">add_box</i>
-    </button>
+        </div>
+   </div>
+     <i class="material-icons right">add_box</i>
+  <button class="btn black green waves-effect waves-light" type="submit">Update Your Workout
+</button>
   </form>
 
 

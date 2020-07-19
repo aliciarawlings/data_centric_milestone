@@ -9,10 +9,7 @@
       <div class="col s12 l6 xl6 m6">
         <div class="card card-size hoverable">
           <div class="card-image waves-effect waves-block waves-light">
-            <img
-              class="activator img-size"
-              src="data:image/png;base64,{{muscle_category.exercise_image}}"
-            />
+            <img class="activator img-size" src="data:image/png;base64,{{muscle_category.exercise_image}}" alt="User Image" />
             <span class="card-title black">{{muscle_category.exercise_type}}</span>
           </div>
     
@@ -37,12 +34,13 @@
               <i class="small material-icons">timer</i
               ><strong>Duration(Minutes) : </strong>{{muscle_category.exercise_duration}}
             </li>
-            <h6><strong>Description:</strong></h6>
-            <li>
-              <i class="small material-icons">assignment</i
-              >{{muscle_category.workout_description}}
-            </li> 
-            </ul>
+             </ul>
+            <hr>
+             <i class="small material-icons">assignment</i>
+            <strong>Description:</strong>
+            {{muscle_category.workout_description}}
+            
+           
 
            
           </div>
@@ -51,7 +49,7 @@
       {% endfor %}
     </div>
   </div>
-  </div>
+  
  
 
 
