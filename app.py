@@ -1,8 +1,8 @@
 import pymongo
 import enum 
-#import bcrypt
+import bcrypt
 import os
-from flask import Flask, render_template, redirect, request, url_for, session,flash
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from bson.binary import Binary
@@ -59,7 +59,10 @@ def get_exercise_category(muscle_category_id):
 # Form Page to allow users to add an exercise
 @app.route('/add_exercise')
 def add_exercise():
-     return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
+    logged_in = True if "username" in session else False
+    if logged_in is False:
+        return render_template ('404.html')
+    return render_template('add_exercise.html', muscle_categories=mongo.db.muscle_categories.find())
 
 
 
@@ -102,7 +105,7 @@ def edit_exercise(user_exercise_id):
     #404 page
       logged_in = True if "username" in session else False
       if logged_in is False:
-            return render_template ('404.html')
+        return render_template ('404.html')
       the_exercise = mongo.db.exercises.find_one({"_id": ObjectId(user_exercise_id)})
       all_categories= mongo.db.muscle_categories.find()
       return render_template('editexercise.html', exercises=the_exercise, 

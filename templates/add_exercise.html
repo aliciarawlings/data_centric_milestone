@@ -20,7 +20,7 @@
       <div class="row ">
         <div class="input-field col s12 "  id="add_more">
           <i class="material-icons prefix">add</i>
-          <input class="validate" type="text" id="exercise_type" name="exercise_type"required data-validation-required-message="Field Required">
+          <input class="validate" type="text" id="exercise_type" name="exercise_type">
           <label for="autocomplete-input">Exercise Name</label>
         </div>
         </div>
@@ -28,7 +28,7 @@
           <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps" name="amount_of_reps"class="autocomplete" required data-validation-required-message="Field Required">
+          <input type="text" id="amount_of_reps" name="amount_of_reps"class="autocomplete" >
           <label for="autocomplete-input">Amount of Reps</label>
         </div>
         </div>
@@ -51,7 +51,7 @@
 
          <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea2" class="materialize-textarea" id="workout_description" name="workout_description" placeholder="Press enter to Make List format"></textarea>
+            <textarea class="materialize-textarea" id="workout_description" name="workout_description" placeholder="Press enter to Make List format"></textarea>
             <label for="textarea2">Workout Description</label>
           </div>
           </div>
@@ -68,7 +68,7 @@
   </div>
   <div class="row">
   <div class="col s6">
-    <button class="btn black waves-effect waves-light white-text" type="submit">Add Your Workout
+    <button onclick ="formValidation()" class="btn black waves-effect waves-light white-text" type="submit">Add Your Workout
       <i class="material-icons right">add_box</i>
     </button>
     </div>
