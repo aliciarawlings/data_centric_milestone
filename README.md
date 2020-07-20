@@ -1,13 +1,13 @@
 # Before and After 
 **To see what a userprofile looks like with content please login under username mark , password mark. Be mindful that it is all lowercase**
 
-click [here](https://data-centric-milestone.herokuapp.com/) for deployed project. 
+click [here](https://data-centric-milestone.herokuapp.com/) for the deployed project. 
 
 ## What is the application for?
 Before and after is an application where users can store their exercises. These Exercises are shared with all other users of the Before and after community. 
 
 ## How is it Used?
-Visitors can search for exercises via muscle category. To search and view exercises registration is not necessary. If a user would like to share and add their own workouts to the application they must create an account first.
+Visitors can search for exercises via muscle category. To search and view exercises, registration is not necessary. If a user would like to share and add their own workouts to the application they must create an account first.
 
 ## How does it work?
 Before and After is a python based flask application which uses **Mongodb** as its database. 
@@ -25,8 +25,9 @@ A **MONGO_URI** and **SECRET_KEY**  are used to securely connect to the database
 * A person who wants to store their favourite exercises.
 
 **User Stories**
-1. As a new visitor:to the site I want the page to be immediately informative and intuitive. 
+1. As a new visitor: I want the page to be immediately informative and intuitive. 
 1. As a new visitor:I want the instructions to be clearly displayed to make my experience smooth. 
+1. As a new visitor: I want a clear indication on how to register. 
 1. As a returning user:I want my profile to display all of my data clearly. 
 1. As a returning user:I want to be able to edit, delete and update any information I submitted. 
 1. As a returning user: I want to be able to login and logout of my profile with ease. 
@@ -53,7 +54,7 @@ Once all these conditions are met, the user is the redirected to their user prof
 
 
 #### Login Authentication:
-This feature retrieves the users information from mongodb and verifies that the password and username is correct. Using the “find_one()” command we fetch the users information  from the users collection. The users password is again hashed and encoded when being entered. Using an “if” statement we ask the system if the password is equal to the account users password and then proceed . The verification is done whereby it checks does the password match with the account users username and password. If unsuccessful its communicated to the users that it is an invalid username/password combination.
+This feature retrieves the users information from mongodb and verifies that the password and username is correct. Using the “find_one()” command we fetch the users information from the users collection. The users password is again hashed and encoded when being entered. Using an “if” statement we ask the system if the password is equal to the account users password and then proceed . The verification is done whereby it checks does the password match with the account users username and password. If unsuccessful its communicated to the users that it is an invalid username/password combination.
 Once authenticated the user is then stored in a session cookie, this is done so that we don’t need to continuously make calls to the database. Along with this is another session cookie which contains the users_id. This means that any submissions made to the database by the user will contain their user id. This corresponds with other features that only allow the user to edit , update and delete their own personal entry’s. 
 
 
