@@ -1,4 +1,6 @@
-#Before and After 
+# Before and After 
+
+click [here](https://data-centric-milestone.herokuapp.com/) for deployed project. 
 
 ## What is the application for?
 Before and after is an application where users can store their exercises. These Exercises are shared with all other users of the Before and after community. 
@@ -119,6 +121,7 @@ The followings steps were taken to deploy to Heroku
 1.	Using the “git push Heroku master” command all work was pushed to Heroku and deployed. 
 
 ##Credits
+
 [free Gym Images](https://www.pexels.com/search/gym/)
 [How to use](bcrypthttp://zetcode.com/python/bcrypt/)
 
