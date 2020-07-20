@@ -1,54 +1,63 @@
 {% extends 'base.html' %} {% block content %}
 
+
 <title>{%block title%}{%endblock%}B&A|Exercises</title>
 <div class="container">
-  <h3><u>Workouts</u></h3>
-<div class="row">
+	<h3>
+		<u>Workouts</u>
+	</h3>
+	<div class="row">
          {% for muscle_category in exercises %} 
 
-      <div class="col s12 l6 xl6 m6">
-        <div class="card card-size hoverable">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator img-size" src="data:image/png;base64,{{muscle_category.exercise_image}}" alt="User Image" />
-            <span class="card-title black">{{muscle_category.exercise_type}}</span>
-          </div>
-    
-      <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"
-              ><i class="material-icons right">close</i></span
-            >
-                     <ul >
-            <li>
-              <i class="small material-icons">title</i
-              ><strong>Exercise Name :</strong>{{ muscle_category.exercise_type }}
-            </li>
-            <li>
-              <i class="small material-icons">rotate_right</i
-              ><strong>How Many Reps :</strong>{{muscle_category.amount_of_reps}}
-            </li>
-            <li>
-              <i class="small material-icons">loop</i
-              ><strong>How Many Sets:</strong>{{ muscle_category.amount_of_sets}}
-            </li>
-            <li>
-              <i class="small material-icons">timer</i
-              ><strong>Duration(Minutes) : </strong>{{muscle_category.exercise_duration}}
-            </li>
-             </ul>
-            <hr>
-             <i class="small material-icons">assignment</i>
-            <strong>Description:</strong>
+      
+		<div class="col s12 l6 xl6 m6">
+			<div class="card card-size hoverable">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img class="activator img-size" src="data:image/png;base64,{{muscle_category.exercise_image}}" alt="User Image" />
+					<span class="card-title black">{{muscle_category.exercise_type}}</span>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">
+						<i class="material-icons right">close</i>
+					</span>
+					<ul >
+						<li>
+							<i class="small material-icons">title</i>
+							<strong>Exercise Name :</strong>{{ muscle_category.exercise_type }}
+            
+						</li>
+						<li>
+							<i class="small material-icons">rotate_right</i>
+							<strong>How Many Reps :</strong>{{muscle_category.amount_of_reps}}
+            
+						</li>
+						<li>
+							<i class="small material-icons">loop</i>
+							<strong>How Many Sets:</strong>{{ muscle_category.amount_of_sets}}
+            
+						</li>
+						<li>
+							<i class="small material-icons">timer</i>
+							<strong>Duration(Minutes) : </strong>{{muscle_category.exercise_duration}}
+            
+						</li>
+					</ul>
+					<hr>
+						<i class="small material-icons">assignment</i>
+						<strong>Description:</strong>
             {{muscle_category.workout_description}}
             
            
 
            
-          </div>
-        </div>
-      </div>
+          
+					</div>
+				</div>
+			</div>
       {% endfor %}
-    </div>
-  </div>
+    
+		</div>
+	</div>
   
  
 

@@ -1,83 +1,76 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <title>{%block title%}{%endblock%}B&A|Add Exercise</title>
 <h3> Add Your Own Exercises </h3>
 <form action="{{url_for('insert_exercise') }}" enctype="multipart/form-data" method="POST">
-<div class="row">
-<div class="input-field col s12">
-    <select id ="muscle_category" name="muscle_category">
-      <option value="" disabled selected>Muscle Categories</option>
+	<div class="row">
+		<div class="input-field col s12">
+			<select id ="muscle_category" name="muscle_category">
+				<option value="" disabled selected>Muscle Categories</option>
       {% for muscles in muscle_categories %}
-        <option value="{{ muscles.muscle_category}}">{{ muscles.muscle_category}}</option>
-      {% endfor %}
-    </select>
-    <label>Muscle Category</label>
-  </div>
-  </div>
-
- <div class="row">
-    <div class="col s12">
-      <div class="row ">
-        <div class="input-field col s12" id="add_more">
-          <i class="material-icons prefix">add</i>
-          <label> Exercise Name</label>
-          <input class="validate" type="text" id="exercise_type" name="exercise_type">
-          
-        </div>
-        </div>
-
-          <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_reps" name="amount_of_reps" class="autocomplete" >
-          <label> Amount of Reps</label>
-        </div>
-        </div>
-
-          <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">add</i>
-          <input type="text" id="amount_of_sets" name="amount_of_sets" required data-validation-required-message="Field Required" >
-          <label>Amount of Sets</label>
-        </div>
-        </div>
-
-          <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">av_timer</i>
-          <input type="number" id="exercise_duration" placeholder ="Add Duration in Minutes" name="exercise_duration" required data-validation-required-message="Field Required">
-          <label>Exercise Duration</label>
-          </div>
-          </div>
-
-         <div class="row">
-          <div class="input-field col s12">
-            <textarea class="materialize-textarea" id="workout_description" name="workout_description" placeholder="Press enter to Make List format"></textarea>
-            <label> Workout Description</label>
-          </div>
-          </div>
-
-        <div class="row">
-        <label>Add Image</label>
-          <div class="input-field col s12">
-          <i class="material-icons prefix">add</i>
-          
-          <input type="file" id="exercise_image" name="exercise_image">
-        </div>
-
         
-    </div>
-  </div>
-  </div>
-  <div class="row">
-  <div class="col s6">
-    <button onclick ="formValidation()" class="btn black waves-effect waves-light white-text" type="submit">Add Your Workout
-      <i class="material-icons right">add_box</i>
-    </button>
-    </div>
-    </div>
+				<option value="{{ muscles.muscle_category}}">{{ muscles.muscle_category}}</option>
+      {% endfor %}
     
-</form>
+			</select>
+			<label>Muscle Category</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12">
+			<div class="row ">
+				<div class="input-field col s12" id="add_more">
+					<i class="material-icons prefix">add</i>
+					<label> Exercise Name</label>
+					<input class="validate" type="text" id="exercise_type" maxlength="20" name="exercise_type" required data-validation-required-message="Field Required">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">add</i>
+						<input type="text" id="amount_of_reps"  maxlength="3" name="amount_of_reps" class="autocomplete" required data-validation-required-message="Field Required" >
+							<label> Amount of Reps</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">add</i>
+							<input type="text" id="amount_of_sets" maxlength="3" name="amount_of_sets" required data-validation-required-message="Field Required" >
+								<label>Amount of Sets</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">av_timer</i>
+								<input type="number" id="exercise_duration" placeholder ="Add Duration in Minutes" name="exercise_duration" required data-validation-required-message="Field Required">
+									<label>Exercise Duration</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<textarea class="materialize-textarea" id="workout_description" name="workout_description" placeholder="Press enter to Make List format" required data-validation-required-message="Field Required"  data-length="5000" maxlength="5000" ></textarea>
+									<label> Workout Description</label>
+								</div>
+							</div>
+							<div class="row">
+								<label>Add Image</label>
+								<div class="input-field col s12">
+									<i class="material-icons prefix">add</i>
+									<input type="file" id="exercise_image" name="exercise_image" required data-validation-required-message="Field Required">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s6">
+								<button class="btn black waves-effect waves-light white-text" type="submit">Add Your Workout
+      
+									<i class="material-icons right">add_box</i>
+								</button>
+							</div>
+						</div>
+					</form>
 
   
 
