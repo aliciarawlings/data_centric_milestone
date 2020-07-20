@@ -17,6 +17,7 @@ A **MONGO_URI** and **SECRET_KEY**  are used to securely connect to the database
 ## UX
 
 **The Ideal User**
+
 1.Someone interested in exercising.
 1.A user who wants to learn exercises(how to)
 1. A user who wants to share their own workout ideas with the community.
@@ -34,9 +35,9 @@ A **MONGO_URI** and **SECRET_KEY**  are used to securely connect to the database
 
 ## Skeleton
 I used "Miro" to create my wireframe
-![Index Page](https://i.ibb.co/2cDxPcN/before-index.png alt="before-index")
-![Search Page](https://i.ibb.co/cvqKyZ0/before-search.png alt="before-search")
-![Add Form](https://i.ibb.co/bXVwfBW/before-add-exer.png alt="before-add-exer")
+![Index Page](https://imgur.com/GV2Nadn)
+![Search Page](https://imgur.com/H2Drjsu)
+![Add Form](https://imgur.com/kZlZlLi)
 
 
 ## Features
