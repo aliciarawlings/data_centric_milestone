@@ -6,7 +6,7 @@ click [here](https://data-centric-milestone.herokuapp.com/) for deployed project
 Before and after is an application where users can store their exercises. These Exercises are shared with all other users of the Before and after community. 
 
 ## How is it Used?
-Visitors can search for exercises via muscle category. To search and view exercises , registration is not necessary. If a user would like to share and add their own workouts to the application they must create an account first.
+Visitors can search for exercises via muscle category. To search and view exercises registration is not necessary. If a user would like to share and add their own workouts to the application they must create an account first.
 
 ## How does it work?
 Before and After is a python based flask application which uses **Mongodb** as its database. 
@@ -18,15 +18,15 @@ A **MONGO_URI** and **SECRET_KEY**  are used to securely connect to the database
 
 **The Ideal User**
 
-1.Someone interested in exercising.
-1.A user who wants to learn exercises(how to)
-1. A user who wants to share their own workout ideas with the community.
-1. A person who wants to store their favourite exercises.
+* Someone interested in exercising.
+* A user who wants to learn exercises(how to)
+* A user who wants to share their own workout ideas with the community.
+* A person who wants to store their favourite exercises.
 
 **User Stories**
 1. As a new visitor:to the site I want the page to be immediately informative and intuitive. 
 1. As a new visitor:I want the instructions to be clearly displayed to make my experience smooth. 
-1. As a returning user: to the page I want to my profile to display me data easily. 
+1. As a returning user:I want my profile to display all of my data clearly. 
 1. As a returning user:I want to be able to edit, delete and update any information I submitted. 
 1. As a returning user: I want to be able to login and logout of my profile with ease. 
 1. As a registered user: I want my exercises to only be controlled by myself, so that no other members can potentially act maliciously with my inputs. 
@@ -42,34 +42,35 @@ I used "Miro" to create my wireframe
 
 ## Features
 #### Navbar:
-The Navbar was created so  the user can search the site efficiently. Side navbar was implemented for mobile devices. 
-The Navbar contains links to search exercises, login, register and home. If the user is logged in successfully then the login button is hidden and the logout
-option is displayed. When the user selectes "search exercises" a drop down of options appear, containing all muscle categories.
+The Navbar was created so the user can search the site efficiently. A Side navbar was implemented for mobile devices. 
+The Navbar contains links to search exercises, login, register and home. If the user is logged in successfully then the login/register links are hidden and the logout
+option is displayed. When the user selects "search exercises" a drop down of options appear, containing all muscle categories.
 
 #### Registered Users:
-A register function was created to enable users to have their own personal information stored in the database, which they only have access to. Using a simple register form the user is prompted to input their email address, name and desired password. The register function checks to see whether the username already exist in the database. Using an “if” statement, if the username is not in the database the function proceeds to the next action of encrypting the password. Using bcrypt, hash and salt is created for the password which makes attempts of retrieving the password harder. 
+A register function was created to enable users to have their own personal information stored in the database, which they only have access to. Using a simple registration form the user is prompted to input their email address, name and desired password. The register function checks to see whether the username already exists in the database. Using an “if” statement, if the username is not in the database the function proceeds to the next action of encrypting the password. Using bcrypt, the password is hashed and salt is added which makes attempts of retrieving the password harder. 
 Once all these conditions are met, the user is the redirected to their user profile. 
 
 
 #### Login Authentication:
-This feature retrieves the users information from mongodb and verifies that the password and username is correct. Using the “find_one()” command we fetch the users information  from the “users“collection. The users password is again hashed and encoded when being entered. Using an “if” statement we ask the system if the password is equal to the account users password then proceed . The verification is done whereby it checks does the password match with the account users username and password. If unsuccessful its communicated to the users that it is an invalid username/password combination.
-Once authenticated the user is then stored in a session cookie, this is done so that we don’t need to continuously make calls to the database.  Along with this is another session cookie which contains the users _id. This means that any submissions made to the database by the user will contain their user id. This corresponds with other features that only allow the user to edit , update and delete their own personal entry’s. 
+This feature retrieves the users information from mongodb and verifies that the password and username is correct. Using the “find_one()” command we fetch the users information  from the users collection. The users password is again hashed and encoded when being entered. Using an “if” statement we ask the system if the password is equal to the account users password and then proceed . The verification is done whereby it checks does the password match with the account users username and password. If unsuccessful its communicated to the users that it is an invalid username/password combination.
+Once authenticated the user is then stored in a session cookie, this is done so that we don’t need to continuously make calls to the database. Along with this is another session cookie which contains the users_id. This means that any submissions made to the database by the user will contain their user id. This corresponds with other features that only allow the user to edit , update and delete their own personal entry’s. 
+
 
 #### Search Exercises :
-A route was created to search for exercises within the database. Visitors to the site can search for exercises depending on their muscle category. The “get_exercises” function will retrieve all relevant data that is listed under the selected muscle category. Also within this function is a for loop. The for loop is put in to place to iterate through mongos collections in order to retrieve the relevant image associated with the relevant document. In order to successfully implement the for loop the variable containing mongo find() command must first be converted into alist. For this image to be displayed it must first be decoded. 
+A route was created to search for exercises within the database. Visitors to the site can search for exercises depending on their muscle category. The “get_exercises” function will retrieve all relevant data that is listed under the selected muscle category. Also within this function is a for loop. The for loop is put in to place to iterate through mongos collections in order to retrieve the relevant images associated with the relevant document. For this image to be displayed it must first be decoded. 
 As part of defensive design I created a class called "muscleCategory" which contained an array of all the muscle categories I have saved in my database. The if statement doesnt allow for anything other than those defined categories to be searched for, thus preventing any untoward usage. 
 
 
 #### Add Exercise:
 Once a user is registered they can add an exercise from their user profile page. An “Add Exercise” button is displayed which redirects the user to a form. Within the form the user must define the exercise muscle category, name, duration, amount of sets, repetitions , description and image. 
 The user can submit an image to the database with their workout. In order to do this the image must be encoded using base64. The encoded string is then returned as a number of bytes by using pythons read() method. Following this it is then inserted into the database along with all the other requested fields from the form. As mentioned before the sessions “user_id” is inserted with this also. 
-An if statement is placed within the code to check if a user is logged in . If not the user is redirected to a 404 page. This was implemented as a defensive design measure. This will stop any attempts of malicious inputs into the search bar. 
+An if statement is placed within the code to check if a user is logged in . If not the user, they are redirected to a 404 page. This was implemented as a defensive design measure. This will stop any attempts of malicious inputs into the url bar. 
 
 
 #### Edit Exercise:
 The edit exercise feature allows the user to edit any submissions they have made to mongo. 
 The function searches the database for the user information that matches the sessions user_id.
-The object within the function uses the get method to retrieve all information that was entered into the relevant fields in the collection. Using the $set  command I was able to define which fields I wanted to get. This was so as not to retrieve the image field. An if statement was put in place to check whether the exercise_image field has received any input. If no file was selected that the original image would remain with the document, otherwise the image would be updated. 
+The object within the function uses the get method to retrieve all information that was entered into the relevant fields in the collection. Using the $set command I was able to define which fields I wanted to get. This was so as not to retrieve the image field. An if statement was put in place to check whether the exercise_image field has received any input. If no file was selected than the original image would remain with the document, otherwise the image would be updated. 
 As previously mention an if statement was also added to this function to check whether or not a user is logged in .
 
 #### Delete Exercise:
@@ -81,11 +82,10 @@ The application was tested manually through the perspective of a registered user
 
 
 ## Features Left To Implement
-I would like to implement a voting/like feature which would result in the site visitor being able to search for the highest ranked exercises. 
-Along with this given more time I would like to of styled the page better. 
-Forgot password option needs to be implemented.
-Delete Account information
-Edit Account information are all things that I would like to implement. 
+* I would like to implement a voting/like feature which would result in the site visitor being able to search for the highest ranked exercises.  
+* Forgot password option needs to be implemented.
+* Delete Account information
+* Edit Account information are all things that I would like to implement. 
 
 
 ## Database Organisation
@@ -107,13 +107,13 @@ Muscle categories display in both previously mention forms. The user information
 
 
 ## Deployment/Hosting
-Gitpod was used as my IDE when developing this application. Using git commit commands all work was continuously pushed to GitHun and Heroku. The page is currently hosted with Heroku. 
+Gitpod was used as my IDE when developing this application. Using git commit commands all work was continuously pushed to GitHub and Heroku. The page is currently hosted with Heroku. 
 
 ##### Deploying to Heroku
-The followings steps were taken to deploy to Heroku
+The followings steps were taken to deploy to Heroku:
 1. Login to my Heroku account.
-1.	Select “create new app”
-1.Choose the name of the application and set the Region to Europe
+1. Select “create new app”
+1. Choose the name of the application and set the Region to Europe
 1. In settings, select configuration vars.
 1. Create PORT (5000) and IP(0.0.0.0)
 1.	Click “Add” 
@@ -127,7 +127,12 @@ The followings steps were taken to deploy to Heroku
 ## Credits
 
 [free Gym Images](https://www.pexels.com/search/gym/)
-[How to use](bcrypthttp://zetcode.com/python/bcrypt/)
+
+[How to use bcrypt](http://zetcode.com/python/bcrypt/)
+
+
+
+
 
 
 
