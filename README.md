@@ -1,4 +1,5 @@
 # Before and After 
+**To see what a userprofile looks like with content please login under username mark , password mark. Be mindful that it is all lowercase**
 
 click [here](https://data-centric-milestone.herokuapp.com/) for deployed project. 
 
