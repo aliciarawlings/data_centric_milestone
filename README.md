@@ -35,9 +35,9 @@ A **MONGO_URI** and **SECRET_KEY**  are used to securely connect to the database
 
 ## Skeleton
 I used "Miro" to create my wireframe
-![Index Page](https://imgur.com/GV2Nadn)
-![Search Page](https://imgur.com/H2Drjsu)
-![Add Form](https://imgur.com/kZlZlLi)
+![Forms](https://i.imgur.com/kZlZlLi.png)
+![Index Page](https://i.imgur.com/4PGzu4m.png)
+![Search Page](https://i.imgur.com/iGHVzEQ.png)
 
 
 ## Features
